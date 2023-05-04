@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Server-Initialization fuer Tests
+        for(int i=0; i<5; ++i)
+            Server.accompaniments.add(new Accompaniment("Begleiter "+ Integer.toString(i+1),this));
         //MainActivity ist aufgeteilt in Fragments zwischen welchen man mittels Navigationsleiste wechseln kann.
         navigationView = findViewById(R.id.navigationbar);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
