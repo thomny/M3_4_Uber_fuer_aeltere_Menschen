@@ -34,6 +34,9 @@ public class AccompanimentAdapter extends ArrayAdapter<Accompaniment> {
         //Komponenten werden mit den Informationen des Albums an der jetzigen Position gefuellt
         accompanimentName.setText(accompaniment.getName());
         accompanimentPicture.setImageDrawable(accompaniment.getProfilepicture());
+        //API-Call und laden des Bildes mittels Picasso
+        String url = "test.at";
+        Picasso.get().load(url).placeholder(R.drawable.baseline_person_24).error(R.drawable.baseline_person_24).into(accompanimentPicture);
         return convertView;
     }
 }

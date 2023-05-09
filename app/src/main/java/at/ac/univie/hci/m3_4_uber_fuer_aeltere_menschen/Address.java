@@ -1,6 +1,8 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
     String street;
     String zipcode;
     String house_number;

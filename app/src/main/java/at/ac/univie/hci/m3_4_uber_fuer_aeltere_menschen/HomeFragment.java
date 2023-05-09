@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,6 +26,25 @@ public class HomeFragment extends Fragment {
                 startRequest();
             }
         });
+        TextView listStatus = contentView.findViewById(R.id.listStatus);
+        if(!User.escorts.isEmpty()) {
+            listStatus.setText("");
+            ListView escortsList = contentView.findViewById(R.id.escortsList);
+            //Adapter fuer die Escort-Liste wird erstellt und festgelegt
+            EscortAdapter escortAdapter = new EscortAdapter(getContext(), User.escorts);
+            escortsList.setAdapter(escortAdapter);
+            escortsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Escort escort = (Escort) adapterView.getItemAtPosition(i);
+                    if(escort==null)
+                        return;
+                    Intent escortInfo = new Intent(getContext(), EscortInfoActivity.class);
+                    escortInfo.putExtra("escort",escort);
+                    startActivity(escortInfo); //Ausfuehren des Intents
+                }
+            });
+        }
         return contentView;
     }
 

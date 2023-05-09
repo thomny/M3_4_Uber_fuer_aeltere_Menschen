@@ -38,7 +38,13 @@ public class RequestAccompanimentDetailsFragment extends Fragment {
             }
         });
         TextView accompanimentName = contentView.findViewById(R.id.accompanimentName);
+        TextView accompanimentAge = contentView.findViewById(R.id.accompanimentAge);
+        TextView accompanimentOccupation = contentView.findViewById(R.id.accompanimentOccupation);
+        TextView accompanimentDescription = contentView.findViewById(R.id.accompanimentDescription);
         accompanimentName.setText(accompaniment.getName());
+        accompanimentAge.setText(Integer.toString(accompaniment.getAge()));
+        accompanimentOccupation.setText(accompaniment.getOccupation());
+        accompanimentDescription.setText(accompaniment.getDescription());
         return contentView;
     }
 

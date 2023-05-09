@@ -12,6 +12,9 @@
         android:theme="@style/Theme.M3_4_Uber_fuer_aeltere_Menschen"
         tools:targetApi="31">
         <activity
+            android:name=".EscortInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".RequestActivity"
             android:exported="false" />
         <activity

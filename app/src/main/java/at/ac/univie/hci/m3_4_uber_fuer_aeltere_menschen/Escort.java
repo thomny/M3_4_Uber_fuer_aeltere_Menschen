@@ -1,13 +1,15 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Escort {
+public class Escort implements Serializable {
     Address start;
     Address destination;
     LocalDateTime time;
     Accompaniment accompaniment;
     Service service;
+    EscortStatus status = EscortStatus.PENDING;
 
     public void setStart(Address start){
         this.start = start;
@@ -23,6 +25,9 @@ public class Escort {
     }
     public void setService(Service service){
         this.service = service;
+    }
+    public void setStatus(EscortStatus service){
+        this.status = status;
     }
 
     public Address getStart() {
@@ -43,5 +48,8 @@ public class Escort {
 
     public Service getService() {
         return service;
+    }
+    public EscortStatus getStatus() {
+        return status;
     }
 }

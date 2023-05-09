@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="60dp"
+    android:layout_marginHorizontal="25dp"
+    android:elevation="30dp">
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:elevation="30dp">
+
+        <TextView
+            android:id="@+id/escortStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="22sp" />
+        <TextView
+            android:id="@+id/escortDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ziel"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="22sp" />
+        <TextView
+            android:id="@+id/escortTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ziel"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="22sp" />
+        <TextView
+            android:id="@+id/escortService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="22sp" />
+        <TextView
+            android:id="@+id/escortAccompaniment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Begleitperson"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="22sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anfragestatus:"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="22sp"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/escortStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="22sp"
+            android:layout_gravity="center_horizontal"/>/>
+    </LinearLayout>
+</RelativeLayout>

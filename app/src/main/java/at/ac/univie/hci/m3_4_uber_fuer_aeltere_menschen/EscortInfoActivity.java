@@ -1,28 +1,21 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.ArrayList;
-
-public class RequestActivity extends AppCompatActivity {
+public class EscortInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request);
-        //RequestActivity ist aufgeteilt in Fragments
-        RequestStartFragment requestStartFragment = new RequestStartFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,requestStartFragment).commit();
+        setContentView(R.layout.activity_escort_info);
+        //Activity ist aufgeteilt in Fragments
+        EscortSummaryFragment escortSummaryFragment = new EscortSummaryFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,escortSummaryFragment).commit();
         ImageButton closeButton = findViewById(R.id.closeButton);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +25,7 @@ public class RequestActivity extends AppCompatActivity {
         });
     }
 
-    public void close() { //Zurueck-Icon fuehrt zur vorherigen Activity zurueck
+    public void close() {
         Intent back = new Intent(this, MainActivity.class);
         startActivity(back);
     }

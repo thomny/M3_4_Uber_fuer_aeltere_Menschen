@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF">
 
+
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="35dp"
@@ -34,16 +35,67 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent" />
-        <TextView
-            android:id="@+id/accompanimentName"
-            android:layout_width="360dp"
-            android:layout_height="74dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="24dp"
-            android:text="Name"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
+
+        <ImageView
+            android:id="@+id/accompanimentPicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/baseline_person_24"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/accompanimentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="90dp"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/accompanimentAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="135dp"
+            android:text="__ Jahre alt"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/accompanimentOccupation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="180dp"
+            android:text="Student"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/accompanimentDescription"
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="260dp"
+            android:text="Description"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

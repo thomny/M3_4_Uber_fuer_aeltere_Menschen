@@ -12,11 +12,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
-public class RequestStartFragment extends Fragment {
+public class EscortSummaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_request_start, container, false);
+        View contentView = inflater.inflate(R.layout.fragment_escort_summary, container, false);
         Button nextButton = contentView.findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,14 +24,11 @@ public class RequestStartFragment extends Fragment {
                 next();
             }
         });
-        SearchView searchbar = contentView.findViewById(R.id.searchbar);
         return contentView;
     }
 
     public void next() { //temporaere Loesung -
-        Address start_address = new Address("Teststrasse", "123", "1010");
-        User.escort_request.setStart(start_address);
-        RequestDestinationFragment requestDestinationFragment = new RequestDestinationFragment();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestDestinationFragment).commit();
+        //RequestDestinationFragment requestDestinationFragment = new RequestDestinationFragment();
+        //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestDestinationFragment).commit();
     }
 }

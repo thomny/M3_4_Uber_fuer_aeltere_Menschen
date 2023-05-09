@@ -44,7 +44,6 @@ public class RequestSummaryFragment extends Fragment {
         time.setText(User.escort_request.getTime().toString());
         service.setText(User.escort_request.getService().toString());
         accompaniment.setText(User.escort_request.getAccompaniment().toString());
-
         return contentView;
     }
 
@@ -53,6 +52,13 @@ public class RequestSummaryFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }
     public void next() { //temporaere Loesung
+        Escort finished_request = new Escort();
+        finished_request.setStart(User.escort_request.start);
+        finished_request.setDestination(User.escort_request.destination);
+        finished_request.setTime(User.escort_request.time);
+        finished_request.setService(User.escort_request.service);
+        finished_request.setAccompaniment(User.escort_request.accompaniment);
+        User.escorts.add(finished_request);
         Intent back = new Intent(getContext(), MainActivity.class);
         startActivity(back);
     }
