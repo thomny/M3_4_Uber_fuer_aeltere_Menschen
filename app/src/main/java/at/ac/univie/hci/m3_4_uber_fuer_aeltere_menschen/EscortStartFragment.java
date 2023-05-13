@@ -12,13 +12,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
-public class EscortSummaryFragment extends Fragment {
+public class EscortStartFragment extends Fragment {
     Escort escort;
     Integer pos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_escort_summary, container, false);
+        View contentView = inflater.inflate(R.layout.fragment_escort_start, container, false);
         Button nextButton = contentView.findViewById(R.id.nextButton);
         Bundle bundle = getArguments();
         pos = bundle.getInt("position");
@@ -29,23 +29,15 @@ public class EscortSummaryFragment extends Fragment {
                 next();
             }
         });
-
         return contentView;
     }
 
     public void next() { //temporaere Loesung -
-        if(escort==null) {
-            Button nextButton = getView().findViewById(R.id.nextButton);
-            nextButton.setText(pos.toString());
-            return;
-        }
-        escort.setUserReady();
-        if(escort.getUserReady()&&escort.getAccompReady()) {
-            Bundle bundle = new Bundle();
-            bundle.putInt("position",pos);
-            EscortStartFragment escortStartFragment = new EscortStartFragment();
-            escortStartFragment.setArguments(bundle);
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, escortStartFragment).commit();
-        }
+        User.finished.add(escort);
+        User.escorts.remove(escort);
+        Bundle bundle = new Bundle();
+        bundle.putInt("positino",pos);
+        EscortFinishFragment escortFinishFragment = new EscortFinishFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, escortFinishFragment).commit();
     }
 }

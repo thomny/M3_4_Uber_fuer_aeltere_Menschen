@@ -25,26 +25,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <DatePicker
-            android:id="@+id/date_picker"
+        <Button
+            android:id="@+id/nowButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="212dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="148dp"
+            android:text="Jetzt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/nextButton"
+            android:id="@+id/customButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="136dp"
-            android:text="Weiter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginStart="268dp"
+            android:layout_marginTop="564dp"
+            android:text="Später"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView"
@@ -56,6 +55,30 @@
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="366dp"
+            android:layout_height="302dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="180dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="170dp"
+            android:layout_height="218dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="500dp"
+            android:format24Hour="true"
+            android:headerBackground="#00000000"
+            android:numbersSelectorColor="#00000000"
+            android:numbersTextColor="#000000"
+            android:timePickerMode="spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

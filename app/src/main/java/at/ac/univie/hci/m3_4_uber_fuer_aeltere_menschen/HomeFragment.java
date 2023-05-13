@@ -2,6 +2,7 @@ package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class HomeFragment extends Fragment {
                     if(escort==null)
                         return;
                     Intent escortInfo = new Intent(getContext(), EscortInfoActivity.class);
-                    escortInfo.putExtra("escort",escort);
+                    escortInfo.putExtra("position", ((Integer) User.escorts.indexOf(escort)));
                     startActivity(escortInfo); //Ausfuehren des Intents
                 }
             });

@@ -40,7 +40,7 @@ public class RequestDestinationFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestStartFragment).commit();
     }
     public void next() { //temporaere Loesung
-        Address destination_address = new Address("Zielgasse", "45", "1020");
+        Address destination_address = new Address();
         User.escort_request.setDestination(destination_address);
         RequestTimeFragment requestTimeFragment = new RequestTimeFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestTimeFragment).commit();

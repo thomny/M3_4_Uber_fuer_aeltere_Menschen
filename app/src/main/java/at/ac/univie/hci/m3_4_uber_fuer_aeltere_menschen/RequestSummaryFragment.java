@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import java.time.LocalDateTime;
+
 public class RequestSummaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +35,8 @@ public class RequestSummaryFragment extends Fragment {
                 next();
             }
         });
+        if(User.escort_request.getNow())
+            User.escort_request.setTime(LocalDateTime.now());
 
         TextView start = contentView.findViewById(R.id.start_location);
         TextView destination = contentView.findViewById(R.id.destination);
@@ -58,6 +62,8 @@ public class RequestSummaryFragment extends Fragment {
         finished_request.setTime(User.escort_request.time);
         finished_request.setService(User.escort_request.service);
         finished_request.setAccompaniment(User.escort_request.accompaniment);
+        finished_request.setId();
+        //User.escort_request = null;
         User.escorts.add(finished_request);
         Intent back = new Intent(getContext(), MainActivity.class);
         startActivity(back);

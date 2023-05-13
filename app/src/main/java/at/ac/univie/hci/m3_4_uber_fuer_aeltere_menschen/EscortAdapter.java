@@ -36,7 +36,8 @@ public class EscortAdapter extends ArrayAdapter<Escort> {
         TextView escortAccompaniment = convertView.findViewById(R.id.escortAccompaniment);
         TextView escortStatus = convertView.findViewById(R.id.escortStatus);
         //Komponenten werden mit den Informationen der Begleitung an der jetzigen Position gefuellt
-        escortStart.setText(escort.getStart().toString());
+        //escortStart.setText(escort.getStart().toString());
+        escortStart.setText(Integer.toString(escort.getId()));
         escortDestination.setText(escort.getDestination().toString());
         escortTime.setText(escort.getTime().toString());
         escortService.setText(escort.getService().toString());
