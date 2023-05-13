@@ -14,6 +14,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class RequestSummaryFragment extends Fragment {
     @Override
@@ -45,7 +46,8 @@ public class RequestSummaryFragment extends Fragment {
         TextView accompaniment = contentView.findViewById(R.id.accompaniment);
         start.setText(User.escort_request.getStart().toString());
         destination.setText(User.escort_request.getDestination().toString());
-        time.setText(User.escort_request.getTime().toString());
+        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        time.setText(User.escort_request.getTime().format(customFormat));
         service.setText(User.escort_request.getService().toString());
         accompaniment.setText(User.escort_request.getAccompaniment().toString());
         return contentView;
@@ -56,6 +58,7 @@ public class RequestSummaryFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }
     public void next() { //temporaere Loesung
+        User.escort_request.setTime(false);
         Escort finished_request = new Escort();
         finished_request.setStart(User.escort_request.start);
         finished_request.setDestination(User.escort_request.destination);

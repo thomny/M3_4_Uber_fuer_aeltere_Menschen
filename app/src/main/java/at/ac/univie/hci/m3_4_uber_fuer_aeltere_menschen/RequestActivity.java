@@ -33,6 +33,7 @@ public class RequestActivity extends AppCompatActivity {
     }
 
     public void close() { //Zurueck-Icon fuehrt zur vorherigen Activity zurueck
+        User.escort_request.setTime(false);
         Intent back = new Intent(this, MainActivity.class);
         startActivity(back);
     }

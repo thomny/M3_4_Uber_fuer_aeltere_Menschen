@@ -35,11 +35,6 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(addressLine2, address.addressLine2);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(addressLine2);
+        return this.addressLine2.equals(address.toString());
     }
 }

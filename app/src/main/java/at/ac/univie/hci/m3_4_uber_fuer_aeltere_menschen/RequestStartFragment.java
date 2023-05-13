@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -79,8 +82,12 @@ public class RequestStartFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Address address = (Address) adapterView.getItemAtPosition(i);
-                if((!(User.address_history.contains(address)))&&(!(address.equals(current)))); //problem
+                ArrayList<Address> test = User.address_history;
+                //Log.d("TAG", address.toString());
+                Log.d("TAG", Integer.toString(User.address_history.size()));
+                if((!(address.equals(current)))&&(!(User.address_favorites.contains(address)))&&(!(User.address_history.contains(address)))) { //problem
                     User.address_history.add(address);
+                }
                 User.escort_request.setStart(address);
                 next();
             }
