@@ -1,6 +1,7 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -58,7 +59,6 @@ public class RequestSummaryFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }
     public void next() { //temporaere Loesung
-        User.escort_request.setTime(false);
         Escort finished_request = new Escort();
         finished_request.setStart(User.escort_request.start);
         finished_request.setDestination(User.escort_request.destination);
@@ -66,9 +66,18 @@ public class RequestSummaryFragment extends Fragment {
         finished_request.setService(User.escort_request.service);
         finished_request.setAccompaniment(User.escort_request.accompaniment);
         finished_request.setId();
-        //User.escort_request = null;
         User.escorts.add(finished_request);
-        Intent back = new Intent(getContext(), MainActivity.class);
-        startActivity(back);
+        Server.accept(finished_request); //Mock
+
+        if (User.escort_request.getNow()) {
+            User.escort_request.setTime(false);
+            Intent escortInfo = new Intent(getContext(), EscortInfoActivity.class);
+            escortInfo.putExtra("position", ((Integer) User.escorts.size()-1));
+            startActivity(escortInfo); //Ausfuehren des Intents
+        } else {
+            User.escort_request.setTime(false);
+            Intent back = new Intent(getContext(), MainActivity.class);
+            startActivity(back);
+        }
     }
 }

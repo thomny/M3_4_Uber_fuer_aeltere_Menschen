@@ -26,13 +26,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/nextButton"
+            android:id="@+id/autoServiceButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="136dp"
-            android:text="Weiter"
+            android:text="Auto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/oeffentlichServiceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="384dp"
+            android:text="Öffentliche Verkehrsmittel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView

@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Escort implements Serializable {
     static int count;
-    int id;
+    int id; //diclare private!!!!!
     Address start;
     Address destination;
     LocalDateTime time;
@@ -20,7 +20,8 @@ public class Escort implements Serializable {
     Service service;
     EscortStatus status = EscortStatus.PENDING;
     boolean userReady = false;
-    boolean accompReady = true;
+    boolean accompReady = false;
+    boolean escortReady = false;
 
     public void setStart(Address start){
         this.start = start;
@@ -40,7 +41,7 @@ public class Escort implements Serializable {
     public void setService(Service service){
         this.service = service;
     }
-    public void setStatus(EscortStatus service){
+    public void setStatus(EscortStatus status){
         this.status = status;
     }
     public void setUserReady() {
@@ -52,6 +53,9 @@ public class Escort implements Serializable {
         if(!this.accompReady)
             this.accompReady = true;
         else this.accompReady =false;
+    }
+    public void setEscortReady() {
+        escortReady = true;
     }
     public void setId() {
         id=count++;
@@ -85,6 +89,7 @@ public class Escort implements Serializable {
     public boolean getAccompReady() {
         return accompReady;
     }
+    public boolean getEscortReady() {return escortReady;}
     public int getId() {
         return id;
     }

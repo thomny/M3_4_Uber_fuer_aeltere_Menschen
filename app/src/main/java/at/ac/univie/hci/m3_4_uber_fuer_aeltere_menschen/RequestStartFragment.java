@@ -50,10 +50,9 @@ public class RequestStartFragment extends Fragment {
                     addressSearchAdapter.clear();
                     addressSearchAdapter.addAll(default_suggestions);
                 }
-                // Remove any previously queued search requests
+
                 searchHandler.removeCallbacks(searchRunnable);
 
-                // Create a new Runnable to make the API call
                 searchRunnable = new Runnable() {
                     @Override
                     public void run() {
@@ -72,8 +71,6 @@ public class RequestStartFragment extends Fragment {
                         }
                     }
                 };
-
-                // Queue the API call after a delay (500 milliseconds)
                 searchHandler.postDelayed(searchRunnable, 500);
                 return true;
             }
@@ -82,9 +79,6 @@ public class RequestStartFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Address address = (Address) adapterView.getItemAtPosition(i);
-                ArrayList<Address> test = User.address_history;
-                //Log.d("TAG", address.toString());
-                Log.d("TAG", Integer.toString(User.address_history.size()));
                 if((!(address.equals(current)))&&(!(User.address_favorites.contains(address)))&&(!(User.address_history.contains(address)))) { //problem
                     User.address_history.add(address);
                 }

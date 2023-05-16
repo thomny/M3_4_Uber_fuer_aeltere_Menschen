@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.squareup.picasso.Picasso;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class EscortAdapter extends ArrayAdapter<Escort> {
@@ -37,9 +38,10 @@ public class EscortAdapter extends ArrayAdapter<Escort> {
         TextView escortStatus = convertView.findViewById(R.id.escortStatus);
         //Komponenten werden mit den Informationen der Begleitung an der jetzigen Position gefuellt
         //escortStart.setText(escort.getStart().toString());
-        escortStart.setText(Integer.toString(escort.getId()));
+        escortStart.setText(escort.getStart().toString());
         escortDestination.setText(escort.getDestination().toString());
-        escortTime.setText(escort.getTime().toString());
+        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        escortTime.setText(escort.getTime().format(customFormat));
         escortService.setText(escort.getService().toString());
         escortAccompaniment.setText(escort.getAccompaniment().toString());
         escortAccompaniment.setText(escort.getAccompaniment().toString());

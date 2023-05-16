@@ -1,7 +1,7 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
 public enum EscortStatus {
-    ACCEPTED("Akzeptiert"), PENDING("Ausstehend"), DECLINED("Abgelehnt");
+    ACCEPTED("Akzeptiert"), PENDING("Ausstehend"), DECLINED("Abgelehnt"), ACTIVE("Aktiv");
 
     private String mappedName ;
 

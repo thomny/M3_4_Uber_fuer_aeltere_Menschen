@@ -1,5 +1,8 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Server {
@@ -17,5 +20,26 @@ public class Server {
         Server.accompaniments.add(
                 new Accompaniment("Julia",30,"Student",
                         "Hi, nice to meet you. My name is Julia and I'm 30 years old"));
+    }
+    public static void accept(Escort escort){
+        AsyncTask<Void, Void, Void> acceptTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                Log.d("TAG","executed");
+                escort.setStatus(EscortStatus.ACCEPTED);
+                Log.d("TAG",escort.getStatus().toString());
+            }
+        };
+        acceptTask.execute();
     }
 }

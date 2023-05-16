@@ -25,11 +25,18 @@ public class RequestServiceFragment extends Fragment {
                 back();
             }
         });
-        Button nextButton = contentView.findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        Button autoServiceButton = contentView.findViewById(R.id.autoServiceButton);
+        autoServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next();
+                next(Service.AUTO);
+            }
+        });
+        Button oeffentlichServiceButton = contentView.findViewById(R.id.oeffentlichServiceButton);
+        oeffentlichServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                next(Service.OEFFENTLICH);
             }
         });
         return contentView;
@@ -39,8 +46,8 @@ public class RequestServiceFragment extends Fragment {
         RequestTimeFragment requestTimeFragment = new RequestTimeFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestTimeFragment).commit();
     }
-    public void next() { //temporaere Loesung
-        User.escort_request.setService(Service.AUTO);
+    public void next(Service service) { //temporaere Loesung
+        User.escort_request.setService(service);
         RequestAccompanimentListFragment requestAccompanimentListFragment = new RequestAccompanimentListFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }
