@@ -11,29 +11,17 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF">
 
-
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/baseline_arrow_back_ios_new_24"
-            android:backgroundTint="#595959"
-            android:contentDescription="Go back"
-            android:onClick="back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_request"/>
 
         <Button
             android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:text="Weiter"
+            style="@style/ButtonStyle"
+            android:layout_marginBottom="50dp"
+            android:text="Begleitperson wählen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView

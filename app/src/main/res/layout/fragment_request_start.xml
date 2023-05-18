@@ -11,37 +11,45 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF">
 
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/CustomGrey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </RelativeLayout>
+
         <SearchView
             android:id="@+id/searchbar"
             android:layout_width="361dp"
             android:layout_height="48dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="128dp"
             android:background="#FFFFFF"
             android:elevation="5dp"
             android:queryHint="Aktueller Standort"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="360dp"
-            android:layout_height="74dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="24dp"
+            style="@style/TitleTextStyle"
             android:text="Wo wollen Sie abgeholt werden?"
-            android:textSize="30sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="361dp"
-            android:layout_height="477dp"
+            android:layout_width="360dp"
+            android:layout_height="437dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="176dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/searchbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

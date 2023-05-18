@@ -12,50 +12,41 @@
         android:background="#FFFFFF"
         tools:context=".older_version.FavoritesActivity">
 
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/baseline_arrow_back_ios_new_24"
-            android:backgroundTint="#595959"
-            android:contentDescription="Go back"
-            android:onClick="back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_request"/>
 
         <Button
             android:id="@+id/autoServiceButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="136dp"
+            style="@style/ButtonStyle"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button"
             android:text="Auto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/oeffentlichServiceButton" />
 
         <Button
             android:id="@+id/oeffentlichServiceButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="384dp"
+            style="@style/ButtonStyle"
+            android:background="@drawable/button"
             android:text="Öffentliche Verkehrsmittel"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="360dp"
-            android:layout_height="74dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="24dp"
+            style="@style/TitleTextStyle"
             android:text="Wie wollen Sie begleitet werden?"
-            android:textSize="30sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

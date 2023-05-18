@@ -12,25 +12,17 @@
         android:background="#FFFFFF"
         tools:context=".older_version.FavoritesActivity">
 
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/baseline_arrow_back_ios_new_24"
-            android:backgroundTint="#595959"
-            android:contentDescription="Go back"
-            android:onClick="back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_request"/>
 
         <Button
             android:id="@+id/nowButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="148dp"
+            style="@style/ButtonStyle"
+            android:layout_width="146dp"
+            android:layout_height="46dp"
+            android:textSize="19dp"
+            android:background="@drawable/button"
             android:text="Jetzt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,14 +39,13 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="360dp"
-            android:layout_height="74dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="24dp"
+            style="@style/TitleTextStyle"
             android:text="Wann wollen Sie abgeholt werden?"
-            android:textSize="30sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <CalendarView
             android:id="@+id/calendarView"

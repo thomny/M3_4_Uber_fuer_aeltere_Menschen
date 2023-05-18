@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp">
+    android:layout_marginTop="16dp"
+    android:layout_gravity="center_horizontal"
+    android:padding="3dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@drawable/item_border">
 
         <ImageView
             android:id="@+id/accompanimentPicture"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="7dp"
             android:src="@drawable/baseline_person_24"/>
 
         <TextView
             android:id="@+id/accompanimentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
             android:text="Accompaniment"
             android:textColor="@color/black"
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginStart="22sp" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/baseline_arrow_forward_ios_24"/>
 </RelativeLayout>

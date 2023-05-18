@@ -25,7 +25,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_home, container, false);
-
+        TextView userGreeting = contentView.findViewById(R.id.userGreeting);
+        userGreeting.setText("Hallo " + User.username + '!');
         //Zugriff auf die Komponenten in contentView
         Button requestButton = contentView.findViewById(R.id.requestButton);
         requestButton.setOnClickListener(new View.OnClickListener() {
