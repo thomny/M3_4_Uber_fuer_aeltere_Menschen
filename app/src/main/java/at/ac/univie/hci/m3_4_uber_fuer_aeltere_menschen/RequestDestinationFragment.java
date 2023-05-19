@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -26,6 +28,8 @@ public class RequestDestinationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_request_destination, container, false);
+        TextView cell1 = contentView.findViewById(R.id.cell1);
+        cell1.setBackgroundResource(R.drawable.progress_bar_cell_filled);
         ImageButton backButton = contentView.findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +87,10 @@ public class RequestDestinationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Address address = (Address) adapterView.getItemAtPosition(i);
+                if(address.equals(User.escort_request.start)) {
+                    Toast.makeText(getContext(), "Startaddresse darf nicht Zieladdresse sein.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if((!(address.equals(current)))&&(!(User.address_favorites.contains(address)))&&(!(User.address_history.contains(address)))) { //problem
                     User.address_history.add(address);
                 }

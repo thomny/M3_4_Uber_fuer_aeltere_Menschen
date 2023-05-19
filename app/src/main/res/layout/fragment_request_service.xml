@@ -15,38 +15,45 @@
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar_request"/>
-
-        <Button
-            android:id="@+id/autoServiceButton"
-            style="@style/ButtonStyle"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button"
-            android:text="Auto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/oeffentlichServiceButton" />
-
-        <Button
-            android:id="@+id/oeffentlichServiceButton"
-            style="@style/ButtonStyle"
-            android:background="@drawable/button"
-            android:text="Öffentliche Verkehrsmittel"
-            android:layout_marginTop="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+        <include
+            android:id="@+id/progressbar"
+            layout="@layout/progress_bar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/textView"
             style="@style/TitleTextStyle"
-            android:text="Wie wollen Sie begleitet werden?"
-            android:layout_marginTop="20dp"
+            android:text="Wie wollen Sie fahren?"
+            android:layout_marginTop="40dp"
+            android:textSize="35dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/progressbar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+            <Button
+                android:id="@+id/autoServiceButton"
+                style="@style/ButtonStyle"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/button"
+                android:text="Auto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+            <Button
+                android:id="@+id/oeffentlichServiceButton"
+                style="@style/ButtonStyle"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/button"
+                android:text="Öffentliche Verkehrsmittel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/autoServiceButton" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

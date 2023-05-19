@@ -4,8 +4,14 @@ import java.util.ArrayList;
 
 public class User {
     public static String username = "Maria";
-    String password;
-    Escort active_escort;
+    public static String password = "password";
+    public static int age = 79;
+    public static String occupation = "Pensionistin";
+    Escort active_escort ;
+    public static String description = "Hallo, ich bin Maria.\n" +
+            "Ich habe Probleme mit dem Fuß, deshalb bin ich oft etwas langsam. " +
+            "Ich höre nicht mehr so gut, aber habe noch immer eine gute Orientierung.";
+
     public static Escort escort_request = new Escort();
     public static ArrayList<Escort> escorts = new ArrayList<>();
     public static ArrayList<Escort> finished = new ArrayList<>();

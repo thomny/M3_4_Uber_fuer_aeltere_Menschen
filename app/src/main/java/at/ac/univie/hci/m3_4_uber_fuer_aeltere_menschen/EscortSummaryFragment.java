@@ -60,9 +60,12 @@ public class EscortSummaryFragment extends Fragment {
         service.setText(User.escort_request.getService().toString());
         accompaniment.setText(User.escort_request.getAccompaniment().toString());
         escortStatus.setText(escort.getStatus().toString());
+        if(escort.getStatus().equals(EscortStatus.ACCEPTED))
+            escortStatus.setTextColor(0xFF4CAF50);
         if(escort.getStatus().equals(EscortStatus.ACCEPTED)
-                &&(LocalDateTime.now().isAfter(escort.getTime()) || LocalDateTime.now().isEqual(escort.getTime())))
+                &&(LocalDateTime.now().isAfter(escort.getTime()) || LocalDateTime.now().isEqual(escort.getTime()))) {
             nextButton.setVisibility(View.VISIBLE);
+        }
         if(!escort.getEscortReady()){
             Log.d("if-block","!escort.getEscortReady()");
             refreshHandler = new Handler();
@@ -93,6 +96,7 @@ public class EscortSummaryFragment extends Fragment {
     public void buttonLogic(){
         Log.d("buttonLogic","entered buttonLogic");
         nextButton.setVisibility(View.VISIBLE);
+        escortStatus.setTextColor(0xFF4CAF50);
         escortStatus.setText(escort.getStatus().toString());
         if (escort.getUserReady() && escort.getAccompReady())
             nextButton.setText("Starten");

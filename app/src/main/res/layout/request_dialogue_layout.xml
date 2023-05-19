@@ -12,14 +12,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="331dp">
+            android:layout_height="440dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
-
 
                 <ImageView
                     android:id="@+id/closeButton"
@@ -35,53 +34,53 @@
                     android:id="@+id/textView3"
                     android:layout_width="275dp"
                     android:layout_height="40dp"
-                    android:text="Die Fahrt ist beendet."
+                    android:text="Glückwunsch!"
+                    android:textStyle="bold"
+                    android:gravity="center"
                     android:textSize="28dp" />
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    app:srcCompat="@drawable/baseline_check_circle_24" />
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:srcCompat="@drawable/thumbsup" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Trinkgeld geben?"
-                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="Neue Fahrt wurde gebucht"
+                    android:textSize="28dp"
                     android:padding="5dp"/>
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_horizontal"
-                    android:padding="15dp">
-
-                    <Button
-                        android:id="@+id/button1"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="40dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="40dp"
+                        app:srcCompat="@drawable/baseline_priority_high_24" />
+                    <TextView
+                        android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1€"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/item_border"/>
-
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2€"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/item_border"/>
-
-                    <Button
-                        android:id="@+id/button3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5€"
-                        android:background="@drawable/item_border"/>
+                        android:gravity="center"
+                        android:text="Deine Begleitung muss die \nFahrt noch bestätigen."
+                        android:textSize="15dp"
+                        android:padding="5dp"/>
                 </LinearLayout>
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Zum Startbildschirm"
+                    android:background="@drawable/button"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

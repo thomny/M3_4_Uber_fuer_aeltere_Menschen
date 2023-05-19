@@ -11,32 +11,54 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="240dp"
-            android:layout_marginEnd="156dp"
-            android:src="@drawable/baseline_check_circle_24"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/CustomGrey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/TitleTextStyle"
+            android:text="Fahrt wurde beendet"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TitleTextStyle"
+            android:layout_marginTop="70dp"
+            android:text="Möchtest du deine Fahrt bewerten?"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/rateButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <Button
-            android:id="@+id/detailsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="136dp"
-            android:text="Begleitdetails"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/rateButton"
+            style="@style/ButtonStyle"
+            android:background="@drawable/button"
+            android:text="Bewerten"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/finishButton"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/finishButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/ButtonStyle"
+            android:background="@drawable/red_button"
             android:layout_marginBottom="60dp"
-            android:text="Fertig"
+            android:text="Nein, danke."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

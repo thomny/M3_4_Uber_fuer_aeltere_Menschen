@@ -4,19 +4,19 @@
         <layer-list>
             <item>
                 <shape>
-                    <padding android:bottom="8dp"/>
-                    <solid android:color="#9E9E9E"/>
+                    <padding android:bottom="4dp"/>
+                    <solid android:color="@color/CustomGrey"/>
                     <corners android:radius="10dp"/>
                 </shape>
             </item>
             <item>
                 <shape>
                     <padding android:bottom="4dp"/>
+                    <solid android:color="@color/CustomRed"/>
                     <stroke
-                        android:color="#E8E8E8"
-                        android:width="5dp"/>
-                    <solid android:color="@color/white"/>
-                    <corners android:radius="5dp"/>
+                        android:color="@color/CustomGrey"
+                        android:width="1dp"/>
+                    <corners android:radius="10dp"/>
                     <padding
                         android:left="8dp"
                         android:top="8dp"
@@ -31,11 +31,11 @@
             <item>
                 <shape>
                     <padding android:bottom="4dp"/>
+                    <solid android:color="@color/CustomRed"/>
                     <stroke
-                        android:color="#E8E8E8"
+                        android:color="@color/CustomGrey"
                         android:width="1dp"/>
-                    <solid android:color="@color/white"/>
-                    <corners android:radius="5dp"/>
+                    <corners android:radius="10dp"/>
                     <padding
                         android:left="8dp"
                         android:top="8dp"

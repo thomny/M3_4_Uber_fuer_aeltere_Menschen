@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+    android:layout_width="370dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="60dp"
-    android:layout_marginHorizontal="25dp"
-    android:elevation="30dp">
+    android:layout_centerHorizontal="true">
 
     <LinearLayout
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:elevation="30dp">
+        android:elevation="10dp"
+        android:background="@drawable/escort_item2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/escort_item1">
+            <TextView
+                android:id="@+id/escortDestination"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="Ziel"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15sp"
+                android:layout_centerVertical="true"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:gravity="right"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15sp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/escortStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_marginStart="22sp"/>
+                    <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/escortTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zeit"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginStart="22sp"/>
+            </LinearLayout>
+        </RelativeLayout>
         <TextView
-            android:id="@+id/escortStart"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start"
+            android:text="Text"
             android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="22sp" />
-        <TextView
-            android:id="@+id/escortDestination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ziel"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="22sp" />
-        <TextView
-            android:id="@+id/escortTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ziel"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="22sp" />
-        <TextView
-            android:id="@+id/escortService"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Art"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="22sp" />
-        <TextView
-            android:id="@+id/escortAccompaniment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Begleitperson"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="22sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Anfragestatus:"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="22sp"
-            android:layout_gravity="center_horizontal"/>
-        <TextView
-            android:id="@+id/escortStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginStart="22sp"
-            android:layout_gravity="center_horizontal"/>/>
+            android:textSize="20sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="15sp"
+            android:layout_marginBottom="10dp"/>
+
     </LinearLayout>
 </RelativeLayout>

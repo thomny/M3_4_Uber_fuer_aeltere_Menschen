@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RequestAccompanimentListFragment">
 
-    <ListView
-        android:id="@+id/accompanimentsList"
-        android:layout_width="375dp"
-        android:layout_height="530dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="176dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:clickable="true"
-        android:divider="@null"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,26 +13,44 @@
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar_request"/>
+        <include
+            android:id="@+id/progressbar"
+            layout="@layout/progress_bar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/textView"
             style="@style/TitleTextStyle"
-            android:text="Wählen Sie eine Begleitperson:"
-            android:layout_marginTop="20dp"
+            android:text="Verfügbare Begleitpersonen"
+            android:layout_marginTop="40dp"
+            android:textSize="35dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/progressbar" />
 
         <TextView
             android:id="@+id/listStatus"
             android:layout_width="240dp"
             android:layout_height="30dp"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="352dp"
             android:text="Keine Begleitperson gefunden."
             android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ListView
+            android:id="@+id/accompanimentsList"
+            android:layout_width="382dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:divider="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

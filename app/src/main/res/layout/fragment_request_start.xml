@@ -18,14 +18,22 @@
             android:background="@color/CustomGrey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
         </RelativeLayout>
+
+        <include
+            android:id="@+id/progressbar"
+            layout="@layout/progress_bar"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <SearchView
             android:id="@+id/searchbar"
             android:layout_width="361dp"
-            android:layout_height="48dp"
+            android:layout_height="60dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="30dp"
+            app:theme="@style/CustomSearchView"
             android:background="#FFFFFF"
             android:elevation="5dp"
             android:queryHint="Aktueller Standort"
@@ -36,11 +44,12 @@
             android:id="@+id/textView"
             style="@style/TitleTextStyle"
             android:text="Wo wollen Sie abgeholt werden?"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
+            android:textSize="35dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/progressbar" />
 
         <ListView
             android:id="@+id/listView"

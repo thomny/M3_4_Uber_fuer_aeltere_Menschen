@@ -1,31 +1,22 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
-import android.animation.ObjectAnimator;
-import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -44,7 +35,11 @@ public class RequestTimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_request_time2, container, false);
+        View contentView = inflater.inflate(R.layout.fragment_request_time, container, false);
+        TextView cell1 = contentView.findViewById(R.id.cell1);
+        cell1.setBackgroundResource(R.drawable.progress_bar_cell_filled);
+        TextView cell2 = contentView.findViewById(R.id.cell2);
+        cell2.setBackgroundResource(R.drawable.progress_bar_cell_filled);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH)+1;
         year = calendar.get(Calendar.YEAR);

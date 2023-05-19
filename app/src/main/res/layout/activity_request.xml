@@ -12,15 +12,23 @@
         android:layout_height="match_parent">
     </FrameLayout>
 
-    <ImageButton
-        android:id="@+id/closeButton"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/close_symbol"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/close_symbol"
+            android:backgroundTint="#FFFFFF" />
+        />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -58,9 +58,14 @@ public class EscortFinishFragment extends Fragment {
         });
 
         tipDialog.show();
-        Button detailsButton = contentView.findViewById(R.id.detailsButton);
-        detailsButton.setVisibility(View.GONE);
-        //User.escorts.remove(escort);
+        Button rateButton = contentView.findViewById(R.id.rateButton);
+        rateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rate();
+            }
+        });
+
         Button finishButton = contentView.findViewById(R.id.finishButton);
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +77,12 @@ public class EscortFinishFragment extends Fragment {
     }
 
     public void finish() { //temporaere Loesung
-
         Intent back = new Intent(getContext(), MainActivity.class);
         startActivity(back);
+    }
+
+    public void rate() { //temporaere Loesung -
+        EscortRateFragment escortRateFragment = new EscortRateFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, escortRateFragment).commit();
     }
 }

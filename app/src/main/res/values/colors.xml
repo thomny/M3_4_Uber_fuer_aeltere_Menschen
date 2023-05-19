@@ -7,8 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="CustomTurquoise">#4ECDC4</color>
+    <color name="CustomTurquoise">#67E4DC</color>
     <color name="CustomGrey">#292F36</color>
     <color name="CustomLightGrey">#91959A</color>
-    <color name="CustomRed">#FF0000</color>
+    <color name="CustomRed">#F44336</color>
+    <color name="CustomGreen">#4CAF50</color>
 </resources>
