@@ -102,6 +102,7 @@ public class RequestDestinationFragment extends Fragment {
     }
 
     public void back() { //Zurueck-Icon fuehrt zur vorherigen Activity zurueck
+        User.escort_request.setStart(null);
         RequestStartFragment requestStartFragment = new RequestStartFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestStartFragment).commit();
     }

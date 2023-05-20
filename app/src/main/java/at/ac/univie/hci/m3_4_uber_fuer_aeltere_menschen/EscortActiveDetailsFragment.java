@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -47,18 +48,30 @@ public class EscortActiveDetailsFragment extends Fragment {
             }
         });
         TextView start = contentView.findViewById(R.id.start_location);
+        TextView start2 = contentView.findViewById(R.id.start_location2);
         TextView destination = contentView.findViewById(R.id.destination);
+        TextView destination2 = contentView.findViewById(R.id.destination2);
         TextView time = contentView.findViewById(R.id.time);
         TextView service = contentView.findViewById(R.id.service);
         TextView accompaniment = contentView.findViewById(R.id.accompaniment);
         escortStatus = contentView.findViewById(R.id.escortStatus);
-        start.setText(escort.getStart().toString());
-        destination.setText(escort.getDestination().toString());
+        start.setText(escort.getStart().getAddressLine1());
+        start2.setText(escort.getStart().getAddressLine2());
+        destination.setText(escort.getDestination().getAddressLine1());
+        destination2.setText(escort.getDestination().getAddressLine2());
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         time.setText(escort.getTime().format(customFormat));
         service.setText(User.escort_request.getService().toString());
         accompaniment.setText(User.escort_request.getAccompaniment().toString());
-        escortStatus.setText(escort.getStatus().toString());
+
+        Button nextButton = contentView.findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         return contentView;
     }
 
@@ -66,6 +79,13 @@ public class EscortActiveDetailsFragment extends Fragment {
         User.escorts.remove(escort);
         Intent back = new Intent(getContext(), MainActivity.class);
         startActivity(back);
+    }
+
+    public void finish() { //temporaere Loesung -
+        User.finished.add(escort);
+        User.escorts.remove(escort);
+        EscortFinishFragment escortFinishFragment = new EscortFinishFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, escortFinishFragment).commit();
     }
 
     public void back(){

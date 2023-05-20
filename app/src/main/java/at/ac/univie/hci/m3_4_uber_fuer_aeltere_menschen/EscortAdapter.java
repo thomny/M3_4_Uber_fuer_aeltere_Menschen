@@ -47,7 +47,7 @@ public class EscortAdapter extends ArrayAdapter<Escort> {
             day = "Heute, "+escort.getTime().format(customFormat2)+" Uhr";
         if(escort.getTime().isEqual(LocalDateTime.now())||escort.getTime().isBefore(LocalDateTime.now()))
             day = "Jetzt ("+escort.getTime().format(customFormat2)+" Uhr)";
-        if((escort.getTime().toLocalDate().plusDays(1)).isEqual(LocalDate.now()))
+        if((escort.getTime().toLocalDate()).isEqual(LocalDate.now().plusDays(1)))
             day = "Morgen, "+escort.getTime().format(customFormat2)+" Uhr";
         escortTime.setText(day);
         String text = escort.getAccompaniment().getName() + " wird Sie um "

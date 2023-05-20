@@ -2,6 +2,7 @@ package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,12 @@ public class AddressSearchAdapter extends ArrayAdapter<Address> {
         //Komponenten werden mit den Informationen der Begleitung an der jetzigen Position gefuellt
         addressLine1.setText(address.getAddressLine1());
         addressLine2.setText(address.getAddressLine2());
+        addressLine1.setTextColor(Color.BLACK);
+        addressLine2.setTextColor(Color.BLACK);
+        if(address.equals(User.escort_request.start)){
+            addressLine1.setTextColor(0xFFCCCCCC);
+            addressLine2.setTextColor(0xFFCCCCCC);
+        }
         return convertView;
     }
 }

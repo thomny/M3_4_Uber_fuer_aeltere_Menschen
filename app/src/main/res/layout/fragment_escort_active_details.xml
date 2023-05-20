@@ -18,40 +18,98 @@
         <Button
             android:id="@+id/cancelButton"
             style="@style/ButtonStyle"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="120dp"
             android:background="@drawable/red_button"
             android:text="Stornieren"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/nextButton"
+            style="@style/ButtonStyle"
+            android:background="@drawable/button"
+            android:layout_marginBottom="13dp"
+            android:text="Fahrt abgeschlossen?"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView"
             style="@style/TitleTextStyle"
-            android:text="Zusammenfassung"
-            android:layout_marginTop="20dp"
+            android:text="Fahrtdetails"
+            android:layout_marginTop="40dp"
+            android:textSize="35dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_border"
+            android:layout_marginVertical="10dp"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:elevation="10dp"
+            android:background="@drawable/escort_item2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
+                android:background="@drawable/escort_item1">
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="15sp"
+                    android:layout_centerVertical="true"
+                    android:padding="10dp"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15sp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/escortStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fahrt aktiv"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:layout_marginStart="22sp"/>
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/baseline_directions_walk_24"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -61,19 +119,36 @@
                     android:text="Start:"
                     android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/start_location"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Start"
-                    android:textSize="25sp" />
+                    android:layout_marginEnd="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/start_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Start"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/start_location2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Start"
+                        android:textSize="20sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -83,20 +158,37 @@
                     android:text="Ziel:"
                     android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/destination"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Ziel"
-                    android:textSize="25sp" />
+                    android:layout_marginEnd="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/destination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Ziel"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/destination2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Ziel"
+                        android:textSize="20sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginStart="15sp">
 
                 <TextView
                     android:id="@+id/zeit"
@@ -116,7 +208,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginStart="15sp">
 
                 <TextView
                     android:id="@+id/art"
@@ -139,37 +232,31 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:text="Begleitung:"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/accompaniment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Begleitung"
+                android:layout_marginStart="15sp"
                 android:textSize="25sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:paddingTop="20dp">
-
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:id="@+id/accompanimentPicture"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/baseline_person_24"/>
                 <TextView
-                    android:id="@+id/anfragestatus"
+                    android:id="@+id/accompaniment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Anfragestatus:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/escortStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#4CAF50"
-                    android:text="Status"
+                    android:layout_marginStart="10dp"
+                    android:text="Begleitung"
                     android:textSize="25sp" />
             </LinearLayout>
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

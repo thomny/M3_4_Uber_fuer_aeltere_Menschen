@@ -21,7 +21,6 @@ public class EscortStartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_escort_start, container, false);
-        Button nextButton = contentView.findViewById(R.id.nextButton);
         Button detailsButton = contentView.findViewById(R.id.detailsButton);
         detailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,17 +31,6 @@ public class EscortStartFragment extends Fragment {
         Bundle bundle = getArguments();
         pos = bundle.getInt("position");
         escort = User.escorts.get(pos);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                debug_next++;
-                if(debug_next == 3) {
-                    Log.d("Debug","finished escort");
-                    debug_next = 0;
-                    next();
-                }
-            }
-        });
         return contentView;
     }
 

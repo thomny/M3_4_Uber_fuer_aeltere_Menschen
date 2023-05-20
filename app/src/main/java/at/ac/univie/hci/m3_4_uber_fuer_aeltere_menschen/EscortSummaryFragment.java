@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class EscortSummaryFragment extends Fragment {
     Integer pos;
     Button nextButton;
     TextView escortStatus;
+    ImageView icon;
     private AsyncTask<Void, Void, Void> accompReadyTask;
     boolean startTimer = true;
     private Handler refreshHandler;
@@ -48,23 +50,30 @@ public class EscortSummaryFragment extends Fragment {
         nextButton = contentView.findViewById(R.id.nextButton);
         nextButton.setVisibility(View.GONE);
         TextView start = contentView.findViewById(R.id.start_location);
+        TextView start2 = contentView.findViewById(R.id.start_location2);
         TextView destination = contentView.findViewById(R.id.destination);
+        TextView destination2 = contentView.findViewById(R.id.destination2);
         TextView time = contentView.findViewById(R.id.time);
         TextView service = contentView.findViewById(R.id.service);
         TextView accompaniment = contentView.findViewById(R.id.accompaniment);
         escortStatus = contentView.findViewById(R.id.escortStatus);
-        start.setText(escort.getStart().toString());
-        destination.setText(escort.getDestination().toString());
+        start.setText(escort.getStart().getAddressLine1());
+        start2.setText(escort.getStart().getAddressLine2());
+        destination.setText(escort.getDestination().getAddressLine1());
+        destination2.setText(escort.getDestination().getAddressLine2());
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         time.setText(escort.getTime().format(customFormat));
         service.setText(User.escort_request.getService().toString());
         accompaniment.setText(User.escort_request.getAccompaniment().toString());
-        escortStatus.setText(escort.getStatus().toString());
-        if(escort.getStatus().equals(EscortStatus.ACCEPTED))
-            escortStatus.setTextColor(0xFF4CAF50);
+        icon = contentView.findViewById(R.id.icon);
+        if(!(escort.getStatus().equals(EscortStatus.ACCEPTED))) {
+            escortStatus.setText("Nicht bestätigt");
+            icon.setImageResource(R.drawable.baseline_close_24_red);
+        }
         if(escort.getStatus().equals(EscortStatus.ACCEPTED)
                 &&(LocalDateTime.now().isAfter(escort.getTime()) || LocalDateTime.now().isEqual(escort.getTime()))) {
             nextButton.setVisibility(View.VISIBLE);
+            buttonLogic();
         }
         if(!escort.getEscortReady()){
             Log.d("if-block","!escort.getEscortReady()");
@@ -96,12 +105,23 @@ public class EscortSummaryFragment extends Fragment {
     public void buttonLogic(){
         Log.d("buttonLogic","entered buttonLogic");
         nextButton.setVisibility(View.VISIBLE);
-        escortStatus.setTextColor(0xFF4CAF50);
-        escortStatus.setText(escort.getStatus().toString());
-        if (escort.getUserReady() && escort.getAccompReady())
+        icon.setImageResource(R.drawable.baseline_close_24_red);
+        if(escort.getStatus().equals(EscortStatus.ACCEPTED)){
+            escortStatus.setText("Fahrt bestätigt");
+            icon.setImageResource(R.drawable.baseline_check_box_24);
+        }
+        if(escort.getStatus().equals(EscortStatus.ACTIVE)){
+            escortStatus.setText("Fahrt aktiv");
+            icon.setImageResource(R.drawable.baseline_directions_walk_24);
+        }
+        if (escort.getUserReady() && escort.getAccompReady()) {
             nextButton.setText("Starten");
-        if (escort.getUserReady() && !escort.getAccompReady())
-            nextButton.setText("Warten");
+            nextButton.setBackgroundResource(R.drawable.button);
+        }
+        if (escort.getUserReady() && !escort.getAccompReady()) {
+            nextButton.setText("Warte auf Begleitung ...");
+            nextButton.setBackgroundResource(R.drawable.white_button);
+        }
         if (!escort.getUserReady() && escort.getAccompReady())
             nextButton.setText("Bereit");
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -109,10 +129,12 @@ public class EscortSummaryFragment extends Fragment {
             public void onClick(View view) {
                 if (!escort.getUserReady() && !escort.getAccompReady()) {
                     escort.setUserReady();
-                    nextButton.setText("Warten");
+                    nextButton.setText("Warte auf Begleitung ...");
+                    nextButton.setBackgroundResource(R.drawable.white_button);
                 } else if (!escort.getUserReady() && escort.getAccompReady()) {
                     escort.setUserReady();
                     nextButton.setText("Starten");
+                    nextButton.setBackgroundResource(R.drawable.button);
                 } else if (escort.getUserReady() && !escort.getAccompReady()) {
                     escort.setUserReady();
                     nextButton.setText("Bereit");
@@ -160,8 +182,10 @@ public class EscortSummaryFragment extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 escort.setAccompReady();
-                if (escort.getUserReady() && escort.getAccompReady())
+                if (escort.getUserReady() && escort.getAccompReady()) {
                     nextButton.setText("Starten");
+                    nextButton.setBackgroundResource(R.drawable.button);
+                }
             }
         };
         accompReadyTask.execute();
