@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_home, container, false);
         TextView userGreeting = contentView.findViewById(R.id.userGreeting);
-        userGreeting.setText("Hallo " + User.username + '!');
+        userGreeting.setText("Hallo " + Server.user.getUserName() + '!');
         //Zugriff auf die Komponenten in contentView
         Button requestButton = contentView.findViewById(R.id.requestButton);
         requestButton.setOnClickListener(new View.OnClickListener() {
@@ -36,11 +36,11 @@ public class HomeFragment extends Fragment {
             }
         });
         TextView listStatus = contentView.findViewById(R.id.listStatus);
-        if(!User.escorts.isEmpty()) {
+        if(!Server.user.getEscorts().isEmpty()) {
             listStatus.setText("");
             ListView escortsList = contentView.findViewById(R.id.escortsList);
             //Adapter fuer die Escort-Liste wird erstellt und festgelegt
-            escortAdapter = new EscortAdapter(getContext(), User.escorts);
+            escortAdapter = new EscortAdapter(getContext(), Server.user.getEscorts());
             escortsList.setAdapter(escortAdapter);
             escortsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
                     if(escort==null)
                         return;
                     Intent escortInfo = new Intent(getContext(), EscortInfoActivity.class);
-                    escortInfo.putExtra("position", ((Integer) User.escorts.indexOf(escort)));
+                    escortInfo.putExtra("position", ((Integer) Server.user.getEscorts().indexOf(escort)));
                     startActivity(escortInfo); //Ausfuehren des Intents
                 }
             });

@@ -1,5 +1,6 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,6 +21,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(!User.online){
+            Intent login = new Intent(this, IntroActivity.class);
+            startActivity(login);
+        }
+
         navigationView = findViewById(R.id.navigationbar);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
         //Klicken auf ein Icon aendert das Fragment

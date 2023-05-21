@@ -4,9 +4,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class Server {
     public static ArrayList<Accompaniment> accompaniments = new ArrayList<>();
+    public static ArrayList<User> users = new ArrayList<>();
+    public static TreeMap userList = new TreeMap();
+    public static User user;
     static {
         Server.accompaniments.add(
                 new Accompaniment("Anna",20,"Student",
@@ -20,6 +25,7 @@ public class Server {
         Server.accompaniments.add(
                 new Accompaniment("Julia",30,"Student",
                         "Hi, nice to meet you. My name is Julia and I'm 30 years old"));
+        Server.userList.put("user",new User("user","pw"));
     }
     public static void accept(Escort escort){
         AsyncTask<Void, Void, Void> acceptTask = new AsyncTask<Void, Void, Void>() {
