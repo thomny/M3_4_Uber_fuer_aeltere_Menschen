@@ -18,7 +18,7 @@ public class EscortInfoActivity extends AppCompatActivity {
         //Integer pos = getIntent().getIntExtra("",0);
         Integer pos;
         pos = getIntent().getIntExtra("position",0);
-        escort = User.escorts.get(pos);
+        escort = Server.user.getEscorts().get(pos);
         Bundle bundle = new Bundle();
         bundle.putInt("position",pos);
         EscortSummaryFragment escortSummaryFragment = new EscortSummaryFragment();

@@ -25,7 +25,8 @@ public class Server {
         Server.accompaniments.add(
                 new Accompaniment("Julia",30,"Student",
                         "Hi, nice to meet you. My name is Julia and I'm 30 years old"));
-        Server.userList.put("user",new User("user","pw"));
+        Server.userList.put("dummy@mail.at",new User("Dummy","dummy@mail.at","dummy"));
+
     }
     public static void accept(Escort escort){
         AsyncTask<Void, Void, Void> acceptTask = new AsyncTask<Void, Void, Void>() {

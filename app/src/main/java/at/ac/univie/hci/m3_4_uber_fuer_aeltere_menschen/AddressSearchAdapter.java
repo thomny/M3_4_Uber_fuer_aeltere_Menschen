@@ -30,6 +30,11 @@ public class AddressSearchAdapter extends ArrayAdapter<Address> {
         if(convertView==null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.address_search_item,parent,false);
         //Zugriff auf die einzelnen Komponenten eines Begleitungs-Listenitems
+        TextView current = convertView.findViewById(R.id.current);
+        current.setVisibility(View.VISIBLE);
+        if(!address.getCurrent()){
+            current.setVisibility(View.GONE);
+        }
         TextView addressLine1 = convertView.findViewById(R.id.addressLine1);
         TextView addressLine2 = convertView.findViewById(R.id.addressLine2);
         //Komponenten werden mit den Informationen der Begleitung an der jetzigen Position gefuellt
@@ -37,7 +42,7 @@ public class AddressSearchAdapter extends ArrayAdapter<Address> {
         addressLine2.setText(address.getAddressLine2());
         addressLine1.setTextColor(Color.BLACK);
         addressLine2.setTextColor(Color.BLACK);
-        if(address.equals(User.escort_request.start)){
+        if(address.equals(Server.user.getEscortRequest().start)){
             addressLine1.setTextColor(0xFFCCCCCC);
             addressLine2.setTextColor(0xFFCCCCCC);
         }

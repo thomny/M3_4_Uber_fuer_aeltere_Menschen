@@ -53,7 +53,7 @@ public class RequestServiceFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestTimeFragment).commit();
     }
     public void next(Service service) { //temporaere Loesung
-        User.escort_request.setService(service);
+        Server.user.getEscortRequest().setService(service);
         RequestAccompanimentListFragment requestAccompanimentListFragment = new RequestAccompanimentListFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }

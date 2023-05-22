@@ -22,25 +22,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(!User.online){
+        if(Server.user == null){
             Intent login = new Intent(this, IntroActivity.class);
             startActivity(login);
-        }
+        } else {
 
-        navigationView = findViewById(R.id.navigationbar);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
-        //Klicken auf ein Icon aendert das Fragment
-        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home: getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
-                        return true;
-                    case R.id.account: getSupportFragmentManager().beginTransaction().replace(R.id.container,accountFragment).commit();
-                        return true;
+            navigationView = findViewById(R.id.navigationbar);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+            //Klicken auf ein Icon aendert das Fragment
+            navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                            return true;
+                        case R.id.account:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, accountFragment).commit();
+                            return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
     }
 }

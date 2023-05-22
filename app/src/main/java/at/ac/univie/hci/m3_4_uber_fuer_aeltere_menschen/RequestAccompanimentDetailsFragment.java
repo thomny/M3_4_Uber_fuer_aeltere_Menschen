@@ -60,7 +60,7 @@ public class RequestAccompanimentDetailsFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }
     public void next() { //temporaere Loesung
-        User.escort_request.setAccompaniment(accompaniment);
+        Server.user.getEscortRequest().setAccompaniment(accompaniment);
         RequestSummaryFragment requestSummaryFragment = new RequestSummaryFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestSummaryFragment).commit();
     }

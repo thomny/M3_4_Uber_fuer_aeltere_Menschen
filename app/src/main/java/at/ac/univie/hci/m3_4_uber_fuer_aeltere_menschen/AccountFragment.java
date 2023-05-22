@@ -28,10 +28,16 @@ public class AccountFragment extends Fragment {
         TextView userAge = contentView.findViewById(R.id.userAge);
         TextView userOccupation = contentView.findViewById(R.id.userOccupation);
         TextView userDescription = contentView.findViewById(R.id.userDescription);
-        userName.setText(User.username);
-        userAge.setText(Integer.toString(User.age));
-        userOccupation.setText(User.occupation);
-        userDescription.setText(User.description);
+        userName.setText(Server.user.getUserName());
+        if(Server.user.getAge()==0)
+            userAge.setText("k.A.");
+        else userAge.setText(Integer.toString(Server.user.getAge()) + " Jahre alt");
+        if(Server.user.getOccupation()==null)
+            userOccupation.setText("k.A.");
+        else userOccupation.setText(Server.user.getOccupation());
+        if(Server.user.getDescription()==null)
+            userDescription.setText(Server.user.getDescription());
+        else userDescription.setText("k.A.");
         return contentView;
     }
 }

@@ -30,13 +30,13 @@ public class EscortStartFragment extends Fragment {
         });
         Bundle bundle = getArguments();
         pos = bundle.getInt("position");
-        escort = User.escorts.get(pos);
+        escort = Server.user.getEscorts().get(pos);
         return contentView;
     }
 
     public void next() { //temporaere Loesung -
-        User.finished.add(escort);
-        User.escorts.remove(escort);
+        Server.user.getFinishedEscorts().add(escort);
+        Server.user.getEscorts().remove(escort);
         Bundle bundle = new Bundle();
         bundle.putInt("position",pos);
         EscortFinishFragment escortFinishFragment = new EscortFinishFragment();

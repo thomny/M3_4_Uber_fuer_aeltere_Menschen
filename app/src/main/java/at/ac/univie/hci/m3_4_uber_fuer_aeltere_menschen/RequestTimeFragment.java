@@ -83,7 +83,7 @@ public class RequestTimeFragment extends Fragment {
         nowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.escort_request.setTime(true);
+                Server.user.getEscortRequest().setTime(true);
                 next();
             }
         });
@@ -104,7 +104,7 @@ public class RequestTimeFragment extends Fragment {
                     return;
                 }
 
-                User.escort_request.setTime(LocalDateTime.of(year,month,day,hour,minute));
+                Server.user.getEscortRequest().setTime(LocalDateTime.of(year,month,day,hour,minute));
                 next();
             }
         });

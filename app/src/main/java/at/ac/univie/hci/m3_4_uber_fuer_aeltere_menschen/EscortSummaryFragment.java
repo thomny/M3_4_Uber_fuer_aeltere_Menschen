@@ -37,7 +37,7 @@ public class EscortSummaryFragment extends Fragment {
 
         Bundle bundle = getArguments();
         pos = bundle.getInt("position");
-        escort = User.escorts.get(pos);
+        escort = Server.user.getEscorts().get(pos);
         if(escort.getStatus().equals(EscortStatus.ACTIVE))
             next();
         Button cancelButton = contentView.findViewById(R.id.cancelButton);
@@ -63,12 +63,15 @@ public class EscortSummaryFragment extends Fragment {
         destination2.setText(escort.getDestination().getAddressLine2());
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         time.setText(escort.getTime().format(customFormat));
-        service.setText(User.escort_request.getService().toString());
-        accompaniment.setText(User.escort_request.getAccompaniment().toString());
+        service.setText(Server.user.getEscortRequest().getService().toString());
+        accompaniment.setText(Server.user.getEscortRequest().getAccompaniment().toString());
         icon = contentView.findViewById(R.id.icon);
         if(!(escort.getStatus().equals(EscortStatus.ACCEPTED))) {
             escortStatus.setText("Nicht bestätigt");
             icon.setImageResource(R.drawable.baseline_close_24_red);
+        } else {
+            escortStatus.setText("Fahrt bestätigt");
+            icon.setImageResource(R.drawable.baseline_check_box_24);
         }
         if(escort.getStatus().equals(EscortStatus.ACCEPTED)
                 &&(LocalDateTime.now().isAfter(escort.getTime()) || LocalDateTime.now().isEqual(escort.getTime()))) {
@@ -94,6 +97,10 @@ public class EscortSummaryFragment extends Fragment {
 
     public void check(){
         Log.d("REFRESH","EscortSummary updated");
+        if(escort.getStatus().equals(EscortStatus.ACCEPTED)) {
+            escortStatus.setText("Fahrt bestätigt");
+            icon.setImageResource(R.drawable.baseline_check_box_24);
+        }
         if(escort.getStatus().equals(EscortStatus.ACCEPTED)
                 &&(LocalDateTime.now().isAfter(escort.getTime()) || LocalDateTime.now().isEqual(escort.getTime()))){
             escort.setEscortReady();
@@ -122,8 +129,10 @@ public class EscortSummaryFragment extends Fragment {
             nextButton.setText("Warte auf Begleitung ...");
             nextButton.setBackgroundResource(R.drawable.white_button);
         }
-        if (!escort.getUserReady() && escort.getAccompReady())
+        if ((!escort.getUserReady() && escort.getAccompReady()) || (!escort.getUserReady() && !escort.getAccompReady())) {
             nextButton.setText("Bereit");
+            nextButton.setBackgroundResource(R.drawable.button);
+        }
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,6 +147,7 @@ public class EscortSummaryFragment extends Fragment {
                 } else if (escort.getUserReady() && !escort.getAccompReady()) {
                     escort.setUserReady();
                     nextButton.setText("Bereit");
+                    nextButton.setBackgroundResource(R.drawable.button);
                 } else if (escort.getUserReady() && escort.getAccompReady() && nextButton.getText().equals("Starten"))
                     next();
             }
@@ -192,7 +202,7 @@ public class EscortSummaryFragment extends Fragment {
     }
 
     public void cancel(){
-        User.escorts.remove(escort);
+        Server.user.getEscorts().remove(escort);
         Intent back = new Intent(getContext(), MainActivity.class);
         startActivity(back);
     }

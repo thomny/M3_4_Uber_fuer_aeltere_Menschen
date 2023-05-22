@@ -32,7 +32,7 @@ public class EscortActiveDetailsFragment extends Fragment {
 
         Bundle bundle = getArguments();
         pos = bundle.getInt("position");
-        escort = User.escorts.get(pos);
+        escort = Server.user.getEscorts().get(pos);
         backButton = contentView.findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +61,8 @@ public class EscortActiveDetailsFragment extends Fragment {
         destination2.setText(escort.getDestination().getAddressLine2());
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         time.setText(escort.getTime().format(customFormat));
-        service.setText(User.escort_request.getService().toString());
-        accompaniment.setText(User.escort_request.getAccompaniment().toString());
+        service.setText(Server.user.getEscortRequest().getService().toString());
+        accompaniment.setText(Server.user.getEscortRequest().getAccompaniment().toString());
 
         Button nextButton = contentView.findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +76,14 @@ public class EscortActiveDetailsFragment extends Fragment {
     }
 
     public void cancel(){
-        User.escorts.remove(escort);
+        Server.user.getEscorts().remove(escort);
         Intent back = new Intent(getContext(), MainActivity.class);
         startActivity(back);
     }
 
     public void finish() { //temporaere Loesung -
-        User.finished.add(escort);
-        User.escorts.remove(escort);
+        Server.user.getFinishedEscorts().add(escort);
+        Server.user.getEscorts().remove(escort);
         EscortFinishFragment escortFinishFragment = new EscortFinishFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, escortFinishFragment).commit();
     }

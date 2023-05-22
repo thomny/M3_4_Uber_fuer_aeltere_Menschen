@@ -51,8 +51,8 @@ public class RequestSummaryFragment extends Fragment {
                 next();
             }
         });
-        if(User.escort_request.getNow())
-            User.escort_request.setTime(LocalDateTime.now());
+        if(Server.user.getEscortRequest().getNow())
+            Server.user.getEscortRequest().setTime(LocalDateTime.now());
 
         TextView start = contentView.findViewById(R.id.start_location);
         TextView destination = contentView.findViewById(R.id.destination);
@@ -61,14 +61,14 @@ public class RequestSummaryFragment extends Fragment {
         TextView time = contentView.findViewById(R.id.time);
         TextView service = contentView.findViewById(R.id.service);
         TextView accompaniment = contentView.findViewById(R.id.accompaniment);
-        start.setText(User.escort_request.getStart().getAddressLine1());
-        start2.setText(User.escort_request.getStart().getAddressLine2());
-        destination.setText(User.escort_request.getDestination().getAddressLine1());
-        destination2.setText(User.escort_request.getDestination().getAddressLine2());
+        start.setText(Server.user.getEscortRequest().getStart().getAddressLine1());
+        start2.setText(Server.user.getEscortRequest().getStart().getAddressLine2());
+        destination.setText(Server.user.getEscortRequest().getDestination().getAddressLine1());
+        destination2.setText(Server.user.getEscortRequest().getDestination().getAddressLine2());
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-        time.setText(User.escort_request.getTime().format(customFormat));
-        service.setText(User.escort_request.getService().toString());
-        accompaniment.setText(User.escort_request.getAccompaniment().toString());
+        time.setText(Server.user.getEscortRequest().getTime().format(customFormat));
+        service.setText(Server.user.getEscortRequest().getService().toString());
+        accompaniment.setText(Server.user.getEscortRequest().getAccompaniment().toString());
         return contentView;
     }
 
@@ -78,16 +78,16 @@ public class RequestSummaryFragment extends Fragment {
     }
     public void next() { //temporaere Loesung
         Escort finished_request = new Escort();
-        finished_request.setStart(User.escort_request.start);
-        finished_request.setDestination(User.escort_request.destination);
-        finished_request.setTime(User.escort_request.time);
-        finished_request.setService(User.escort_request.service);
-        finished_request.setAccompaniment(User.escort_request.accompaniment);
+        finished_request.setStart(Server.user.getEscortRequest().start);
+        finished_request.setDestination(Server.user.getEscortRequest().destination);
+        finished_request.setTime(Server.user.getEscortRequest().time);
+        finished_request.setService(Server.user.getEscortRequest().service);
+        finished_request.setAccompaniment(Server.user.getEscortRequest().accompaniment);
         finished_request.setId();
-        User.escorts.add(finished_request);
+        Server.user.getEscorts().add(finished_request);
         Server.accept(finished_request); //Mock
 
-        User.escort_request.setTime(false);
+        Server.user.getEscortRequest().setTime(false);
 
         finishDialog = new Dialog(getContext());
         finishDialog.setContentView(R.layout.request_dialogue_layout);

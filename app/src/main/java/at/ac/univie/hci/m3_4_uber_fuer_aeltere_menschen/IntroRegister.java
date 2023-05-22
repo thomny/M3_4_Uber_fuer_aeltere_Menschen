@@ -20,14 +20,16 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-public class IntroLogin extends Fragment {
+public class IntroRegister extends Fragment {
+    String name;
     String email;
     String password;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_intro_login, container, false);
+        View contentView = inflater.inflate(R.layout.fragment_intro_register, container, false);
 
+        EditText nameEditText = contentView.findViewById(R.id.name);
         EditText accountNameEditText = contentView.findViewById(R.id.accountname);
         EditText passwordEditText = contentView.findViewById(R.id.passwordView);
         Button loginButton = contentView.findViewById(R.id.loginButton);
@@ -36,6 +38,8 @@ public class IntroLogin extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String lowercaseName = nameEditText.getText().toString().toLowerCase();
+                name = lowercaseName.substring(0, 1).toUpperCase() + lowercaseName.substring(1);
                 email = accountNameEditText.getText().toString();
                 password = passwordEditText.getText().toString();
                 next();
@@ -51,28 +55,17 @@ public class IntroLogin extends Fragment {
     }
 
     public void next(){
-        if(email.isEmpty()&&password.isEmpty()) {
-            Toast.makeText(getContext(), "Email und Passwort ist leer.", Toast.LENGTH_SHORT).show();
+        if(email.isEmpty()||password.isEmpty()||name.isEmpty()) {
+            Toast.makeText(getContext(), "Bitte füllen Sie alle Felder aus.", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(email.isEmpty()) {
-            Toast.makeText(getContext(), "Email ist leer.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(password.isEmpty()) {
-            Toast.makeText(getContext(), "Passwort ist leer.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if(Server.userList.containsKey(email)){
-            User user;
-            user = (User) Server.userList.get(email);
-            if(user.getPassword().equals(password)){
-                Server.user = (User) Server.userList.get(email);
-                Intent main = new Intent(getContext(), MainActivity.class);
-                startActivity(main);
-            }
-        } else Toast.makeText(getContext(), "Email oder Passwort falsch.", Toast.LENGTH_SHORT).show();
+        User user = new User(name,email,password);
+        if(!Server.userList.containsKey(email)) {
+            Server.userList.put(email,user);
+            Server.user = user;
+            Intent main = new Intent(getContext(), MainActivity.class);
+            startActivity(main);
+        } else Toast.makeText(getContext(), "Email bereits registriert", Toast.LENGTH_SHORT).show();
     }
 
     public void back() {

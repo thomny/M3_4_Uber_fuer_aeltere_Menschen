@@ -5,6 +5,9 @@ import java.util.Objects;
 public class Address {
     String addressLine1;
     String addressLine2;
+    String longitude;
+    String latitude;
+    boolean current;
 
     public Address(String addressLine1, String addressLine2){
         this.addressLine1 = addressLine1;
@@ -19,12 +22,18 @@ public class Address {
     public void setAddressLine2(String address) {
         this.addressLine2 = address;
     }
+    public void setLongitude(String longitude) {this.longitude = longitude;}
+    public void setLatitude(String latitude) {this.latitude = latitude;}
+    public void setCurrent(boolean current) {this.current = current;}
     public String getAddressLine1() {
         return addressLine1;
     }
     public String getAddressLine2() {
         return addressLine2;
     }
+    public String getLongitude() {return longitude;}
+    public String getLatitude() {return latitude;}
+    public boolean getCurrent() {return current;}
 
     public String toString() {
         return addressLine2;
