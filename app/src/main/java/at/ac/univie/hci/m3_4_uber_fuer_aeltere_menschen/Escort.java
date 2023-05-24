@@ -22,6 +22,7 @@ public class Escort implements Serializable { //Begleitungs/Fahrt-Klasse
     boolean userReady = false;
     boolean accompReady = false;
     boolean escortReady = false;
+    Payment payment;
 
     public void setStart(Address start){
         this.start = start;
@@ -60,7 +61,7 @@ public class Escort implements Serializable { //Begleitungs/Fahrt-Klasse
     public void setId() {
         id=count++;
     }
-
+    public void setPayment(Payment payment) {this.payment=payment;}
     public Address getStart() {
         return start;
     }

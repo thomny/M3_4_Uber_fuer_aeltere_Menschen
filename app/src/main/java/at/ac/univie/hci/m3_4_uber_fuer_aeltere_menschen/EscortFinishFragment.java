@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 public class EscortFinishFragment extends Fragment {
     Escort escort;
@@ -30,10 +32,18 @@ public class EscortFinishFragment extends Fragment {
         tipDialog.setContentView(R.layout.tip_dialogue_layout);
         tipDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ImageView tipCloseButton=tipDialog.findViewById(R.id.closeButton);
+        TextView declineButton = tipDialog.findViewById(R.id.declineTextView);
+        declineButton.setText(Html.fromHtml("<u>" + "Nein, danke" + "</u>"));
         Button tipButton1 = tipDialog.findViewById(R.id.button1);
         Button tipButton2 = tipDialog.findViewById(R.id.button2);
         Button tipButton3 = tipDialog.findViewById(R.id.button3);
         tipCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tipDialog.dismiss();
+            }
+        });
+        declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 tipDialog.dismiss();

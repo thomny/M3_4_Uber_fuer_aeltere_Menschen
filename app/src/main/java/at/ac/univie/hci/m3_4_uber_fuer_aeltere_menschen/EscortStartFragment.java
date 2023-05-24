@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -39,15 +40,22 @@ public class EscortStartFragment extends Fragment {
     double targLat;
     double targLon;
     Location targetLocation = new Location("");
+    TextView noch;
     TextView distance;
     Dialog detailsDialog;
+    Dialog cancelDialog;
+    Dialog finishDialog;
+    String distanceInMeter;
+    int intDistance;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_escort_start, container, false);
         //Zugriff auf die Komponenten in contentView
-        distance = contentView.findViewById(R.id.distance);
         Button detailsButton = contentView.findViewById(R.id.detailsButton);
+        ImageView loadingAnimation = contentView.findViewById(R.id.imageView);
+        AnimationDrawable animationDrawable = (AnimationDrawable) loadingAnimation.getBackground();
+        animationDrawable.start();
         detailsButton.setOnClickListener(new View.OnClickListener() {
             @Override //öffnet Begleitpersonendetail-Dialog
             public void onClick(View view) {
@@ -74,9 +82,16 @@ public class EscortStartFragment extends Fragment {
                 currLon = longitude;
                 Log.d("IN PROCESS","destination not yet reached");
                 Log.d("DISTANCE", Float.toString(location.distanceTo(targetLocation)));
-                distance.setText(Float.toString(location.distanceTo(targetLocation)));
-                if (location.distanceTo(targetLocation) <= 20) {
+                intDistance = (int) Math.floor(location.distanceTo(targetLocation));
+                distanceInMeter = Integer.toString(intDistance) + 'm'; //Distanz zum Ziel wird mitgeführt
+                if(distance!=null) {
+                    distance.setText(distanceInMeter); //und im Fahrtdetail-Dialog angezeigt
+                    noch.setVisibility(View.VISIBLE);
+                }
+                if (location.distanceTo(targetLocation) <= 10) {
                     Log.d("GOAL","reached destination");
+                    if(distance.getText().equals(0)) //Fehlerabsicherung
+                        return;
                     next();
                 }
             }
@@ -105,6 +120,13 @@ public class EscortStartFragment extends Fragment {
         bundle.putInt("position",pos);
         EscortFinishFragment escortFinishFragment = new EscortFinishFragment();
         FragmentActivity activity = getActivity();
+        //schließt alle offenen Dialoge bei Fragmentwechsel
+        if (detailsDialog!=null)
+            detailsDialog.dismiss();
+        if (finishDialog!=null)
+            finishDialog.dismiss();
+        if (cancelDialog!=null)
+            cancelDialog.dismiss();
         if (activity != null) {
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, escortFinishFragment).commit();
         }
@@ -135,6 +157,13 @@ public class EscortStartFragment extends Fragment {
         TextView service = detailsDialog.findViewById(R.id.service);
         TextView accompaniment = detailsDialog.findViewById(R.id.accompaniment);
         ImageView accompanimentPicture = detailsDialog.findViewById(R.id.accompanimentPicture);
+        noch = detailsDialog.findViewById(R.id.noch);
+        noch.setVisibility(View.GONE);
+        if(distanceInMeter!=null) {
+            noch.setVisibility(View.VISIBLE);
+            distance = detailsDialog.findViewById(R.id.distance);
+            distance.setText(distanceInMeter);
+        }
         start.setText(escort.getStart().getAddressLine1());
         start2.setText(escort.getStart().getAddressLine2());
         destination.setText(escort.getDestination().getAddressLine1());
@@ -150,15 +179,14 @@ public class EscortStartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 detailsDialog.dismiss();
-                next();
+                openfinishDialog();
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 detailsDialog.dismiss();
-                Server.user.getEscorts().remove(escort);
-                getActivity().finish();
+                openCancelDialog();
             }
         });
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -168,5 +196,65 @@ public class EscortStartFragment extends Fragment {
             }
         });
         detailsDialog.show();
+    }
+
+    public void openCancelDialog(){
+        //Dialogfenster: Stornierungsbestätigung
+        cancelDialog = new Dialog(getContext());
+        cancelDialog.setContentView(R.layout.cancel_dialogue_layout);
+        cancelDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button yesButton = cancelDialog.findViewById(R.id.yesButton);
+        Button noButton = cancelDialog.findViewById(R.id.noButton);
+        ImageView closeButton = cancelDialog.findViewById(R.id.closeButton);
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+                Server.user.getEscorts().remove(escort);
+                getActivity().finish();
+            }
+        });
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+            }
+        });
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+            }
+        });
+        cancelDialog.show();
+    }
+    public void openfinishDialog(){
+        //Dialogfenster: Fahrtabschlussbestätigung
+        finishDialog = new Dialog(getContext());
+        finishDialog.setContentView(R.layout.finish_dialogue_layout);
+        finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button yesButton = finishDialog.findViewById(R.id.yesButton);
+        Button noButton = finishDialog.findViewById(R.id.noButton);
+        ImageView closeButton = finishDialog.findViewById(R.id.closeButton);
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishDialog.dismiss();
+                next();
+            }
+        });
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishDialog.dismiss();
+            }
+        });
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishDialog.dismiss();
+            }
+        });
+        finishDialog.show();
     }
 }

@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 public class IntroWelcome extends Fragment {
@@ -24,12 +26,13 @@ public class IntroWelcome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_intro_welcome, container, false);
-
+        //Zugriff auf die Komponenten in contentView
         TextView textView4 = contentView.findViewById(R.id.textView4);
         textView4.setText(Html.fromHtml("<u>" + "So funktioniert’s!" + "</u>"));
         TextView registerButton = contentView.findViewById(R.id.registerTextView);
         registerButton.setText(Html.fromHtml("oder " + "<u>" + "registrieren" + "</u>"));
-
+        ImageButton menu = contentView.findViewById(R.id.menu);
+        menu.setVisibility(View.GONE);
         Button loginButton = contentView.findViewById(R.id.loginButton);
         ImageView logo = contentView.findViewById(R.id.logo);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -50,19 +53,23 @@ public class IntroWelcome extends Fragment {
                 dummyLogin();
             }
         });
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {            }
+        });
         return contentView;
     }
 
-    public void login() {
+    public void login() { //führt zum LoginScreen
         IntroLogin introLoginFragment = new IntroLogin();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,introLoginFragment).commit();
     }
-    public void register() {
+    public void register() { //führt zum RegistrierungsScreen
         IntroRegister introRegisterFragment = new IntroRegister();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,introRegisterFragment).commit();
     }
 
-    public void dummyLogin() {
+    public void dummyLogin() { //schneller Einstieg in die App für Testzwecke
         Server.user = (User) Server.userList.get("dummy@mail.at");
         Intent main = new Intent(getContext(), MainActivity.class);
         startActivity(main);

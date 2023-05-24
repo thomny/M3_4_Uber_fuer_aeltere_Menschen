@@ -18,7 +18,8 @@ public class Server { //Simulation eines Servers (Mock)
     static {
         Server.accompaniments.add(
                 new Accompaniment("Anna",20,"Student",
-                        "Hi, nice to meet you. My name is Anna and I'm 20 years old"));
+                        "Hallo, mein Name ist Anna. Ich spreche deutsch, türkisch und ein wenig serbisch.\n" +
+                                "Ich habe viel Geduld und begleite dich gerne zu Arztterminen."));
         Server.accompaniments.add(
                 new Accompaniment("Peter",23,"Student",
                         "Hi, nice to meet you. My name is Peter and I'm 23 years old"));

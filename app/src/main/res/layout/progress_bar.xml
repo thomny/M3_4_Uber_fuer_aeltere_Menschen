@@ -18,35 +18,41 @@
             <TextView
                 android:id="@+id/cell1"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/progress_bar_cell" />
 
             <TextView
                 android:id="@+id/cell2"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/progress_bar_cell" />
 
             <TextView
                 android:id="@+id/cell3"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/progress_bar_cell" />
 
             <TextView
                 android:id="@+id/cell4"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/progress_bar_cell" />
 
             <TextView
                 android:id="@+id/cell5"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/progress_bar_cell" />
+            <TextView
+                android:id="@+id/cell6"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/progress_bar_cell" />
         </LinearLayout>

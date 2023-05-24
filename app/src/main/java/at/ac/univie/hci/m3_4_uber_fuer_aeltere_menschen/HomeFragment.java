@@ -7,11 +7,15 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -28,6 +32,13 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_home, container, false);
         //Zugriff auf die Komponenten in contentView
+        ImageButton menu = contentView.findViewById(R.id.menu);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupMenu(view);
+            }
+        });
         TextView userGreeting = contentView.findViewById(R.id.userGreeting);
         listStatus = contentView.findViewById(R.id.listStatus);
         Button requestButton = contentView.findViewById(R.id.requestButton);
@@ -38,7 +49,7 @@ public class HomeFragment extends Fragment {
                 startRequest();
             }
         });
-        //Escort-Listen-Logik
+        //Escort-Listen-Logik (listStatus wird im Moment nicht verwendet)
         if(!Server.user.getEscorts().isEmpty()) {
             listStatus.setText("");
         }
@@ -57,7 +68,6 @@ public class HomeFragment extends Fragment {
                 refresh();
             }
         });
-
         //Refresh-Logik
         refreshHandler = new Handler();
         refreshRunnable = new Runnable() {
@@ -68,33 +78,28 @@ public class HomeFragment extends Fragment {
             }
         };
         refreshHandler.postDelayed(refreshRunnable, 5000);
-
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {            }
         });
-
         return contentView;
     }
+
+
     public void refresh(){ //Liste wird geupdated
         Log.d("REFRESH","Page updated");
         if (escortAdapter != null)
             escortAdapter.notifyDataSetChanged();
         listStatus.setText("");
-        if(Server.user.getEscorts().isEmpty())
-            listStatus.setText("Noch keine Begleitungen.");
+        if(Server.user!=null&&Server.user.getEscorts().isEmpty())
+            listStatus.setText("");
+            //listStatus.setText("Noch keine Begleitungen.");
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         refreshHandler.removeCallbacks(refreshRunnable);
     }
-    /*@Override
-    public void onPause() { //Wechseln des Fragments pausiert Refresh
-        super.onPause();
-        refreshHandler.removeCallbacks(refreshRunnable);
-    }*/
-
 
     public void startRequest () {
         //Intent fuer das Wechseln der momentanen Activity zu RequestActivity wird erstellt
@@ -102,5 +107,27 @@ public class HomeFragment extends Fragment {
         startActivity(request);
         listStatus.setText("");
         refresh();
+    }
+
+    public void popupMenu(View view) { //TopBar-Menü
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.topbarmenu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menuItem2: logout(); //Abmeldeoption
+                        return true;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    public void logout() { //Abmelden
+        Server.user = null;
+        getActivity().finish();
     }
 }

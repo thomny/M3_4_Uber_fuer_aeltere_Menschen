@@ -71,7 +71,6 @@ public class RequestSummaryFragment extends Fragment {
                 back();
             }
         });
-
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,46 +91,8 @@ public class RequestSummaryFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }
     public void next() {
-        //Daten werden in ein neues Escort-Objekt übernommen und in die Escort-Liste des Users eingefügt
-        Escort finished_request = new Escort();
-        finished_request.setStart(Server.user.getEscortRequest().start);
-        finished_request.setDestination(Server.user.getEscortRequest().destination);
-        finished_request.setTime(Server.user.getEscortRequest().time);
-        finished_request.setService(Server.user.getEscortRequest().service);
-        finished_request.setAccompaniment(Server.user.getEscortRequest().accompaniment);
-        finished_request.setId();
-        Server.user.getEscorts().add(finished_request);
-        Server.accept(finished_request); //Mock: ausgewählte Begleitperson bestätigt die Anfrage
-        //Dialogfenster: Abschluss einer erfolgreichen Anfrage
-        finishDialog = new Dialog(getContext());
-        finishDialog.setContentView(R.layout.request_dialogue_layout);
-        finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        ImageView finishCloseButton = finishDialog.findViewById(R.id.closeButton);
-        Button tipButton1 = finishDialog.findViewById(R.id.button1);
-        tipButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finishDialog.dismiss();
-                finish();
-            }
-        });
-        finishCloseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finishDialog.dismiss();
-                finish();
-            }
-        });
-        finishDialog.show();
+        RequestPaymentFragment requestPaymentFragment = new RequestPaymentFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestPaymentFragment).commit();
     }
 
-    public void finish (){
-        //ausgewählte Daten werden bei Abbruch der Anforderung gelöscht
-        Server.user.getEscortRequest().setTime(false);
-        Server.user.getEscortRequest().setStart(null);
-        Server.user.getEscortRequest().setDestination(null);
-        Server.user.getEscortRequest().setService(null);
-        Server.user.getEscortRequest().setAccompaniment(null);
-        getActivity().finish();
-    }
 }

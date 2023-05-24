@@ -39,7 +39,7 @@
                 <TextView
                     android:id="@+id/textView"
                     style="@style/TitleTextStyle"
-                    android:text="Wann wollen Sie abgeholt werden??"
+                    android:text="Wann wollen Sie abgeholt werden?"
                     android:layout_marginTop="40dp"
                     android:textSize="35dp"
                     app:layout_constraintEnd_toEndOf="parent"

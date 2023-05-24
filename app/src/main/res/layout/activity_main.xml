@@ -28,6 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigationbar"
         app:itemIconSize="50dp"
-        android:padding="10dp"/>
+        android:padding="5dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

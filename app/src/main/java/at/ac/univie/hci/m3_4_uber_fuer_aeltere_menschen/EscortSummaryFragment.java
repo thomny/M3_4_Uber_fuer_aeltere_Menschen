@@ -1,6 +1,9 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -27,10 +30,12 @@ public class EscortSummaryFragment extends Fragment {
     Button nextButton;
     TextView escortStatus;
     ImageView icon;
-    private AsyncTask<Void, Void, Void> accompReadyTask;
+    Dialog cancelDialog;
+    AsyncTask<Void, Void, Void> accompReadyTask;
     boolean startTimer = true;
-    private Handler refreshHandler;
-    private Runnable refreshRunnable;
+    Handler refreshHandler;
+    Runnable refreshRunnable;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class EscortSummaryFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancel();
+                openCancelDialog();
             }
         });
         nextButton = contentView.findViewById(R.id.nextButton);
@@ -216,8 +221,34 @@ public class EscortSummaryFragment extends Fragment {
         accompReadyTask.execute();
     }
 
-    public void cancel(){ //Begleitung wird storniert
-        Server.user.getEscorts().remove(escort);
-        getActivity().finish();
+    public void openCancelDialog(){
+        //Dialogfenster: Stornierungsbestätigung
+        cancelDialog = new Dialog(getContext());
+        cancelDialog.setContentView(R.layout.cancel_dialogue_layout);
+        cancelDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button yesButton = cancelDialog.findViewById(R.id.yesButton);
+        Button noButton = cancelDialog.findViewById(R.id.noButton);
+        ImageView closeButton = cancelDialog.findViewById(R.id.closeButton);
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+                Server.user.getEscorts().remove(escort);
+                getActivity().finish();
+            }
+        });
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+            }
+        });
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+            }
+        });
+        cancelDialog.show();
     }
 }

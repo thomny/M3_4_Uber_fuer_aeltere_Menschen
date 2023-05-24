@@ -88,7 +88,7 @@ public class RequestAccompanimentListFragment extends Fragment {
         accompanimentAge.setText(Integer.toString(accompaniment.getAge()));
         accompanimentOccupation.setText(accompaniment.getOccupation());
         accompanimentDescription.setText(accompaniment.getDescription());
-        if(Server.user.getProfilepicture()!=null)
+        if(accompaniment.getProfilepicture()!=null)
             accompanimentPicture.setImageDrawable(accompaniment.getProfilepicture());
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override

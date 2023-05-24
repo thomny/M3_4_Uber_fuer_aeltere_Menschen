@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 public class IntroLogin extends Fragment {
@@ -27,12 +28,11 @@ public class IntroLogin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_intro_login, container, false);
-
+        //Zugriff auf die Komponenten in contentView
         EditText accountNameEditText = contentView.findViewById(R.id.accountname);
         EditText passwordEditText = contentView.findViewById(R.id.passwordView);
         Button loginButton = contentView.findViewById(R.id.loginButton);
         ImageButton backButton = contentView.findViewById(R.id.backButton);
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,10 +47,16 @@ public class IntroLogin extends Fragment {
                 back();
             }
         });
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                back();
+            }
+        });
         return contentView;
     }
 
-    public void next(){
+    public void next(){ //Login-Logik
         if(email.isEmpty()&&password.isEmpty()) {
             Toast.makeText(getContext(), "Email und Passwort ist leer.", Toast.LENGTH_SHORT).show();
             return;
@@ -63,7 +69,6 @@ public class IntroLogin extends Fragment {
             Toast.makeText(getContext(), "Passwort ist leer.", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if(Server.userList.containsKey(email)){
             User user;
             user = (User) Server.userList.get(email);
@@ -71,6 +76,7 @@ public class IntroLogin extends Fragment {
                 Server.user = (User) Server.userList.get(email);
                 Intent main = new Intent(getContext(), MainActivity.class);
                 startActivity(main);
+                back();
             }
         } else Toast.makeText(getContext(), "Email oder Passwort falsch.", Toast.LENGTH_SHORT).show();
     }

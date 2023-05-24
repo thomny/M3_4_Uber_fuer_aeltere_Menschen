@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 public class IntroRegister extends Fragment {
@@ -28,13 +29,12 @@ public class IntroRegister extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_intro_register, container, false);
-
+        //Zugriff auf die Komponenten in contentView
         EditText nameEditText = contentView.findViewById(R.id.name);
         EditText accountNameEditText = contentView.findViewById(R.id.accountname);
         EditText passwordEditText = contentView.findViewById(R.id.passwordView);
         Button loginButton = contentView.findViewById(R.id.loginButton);
         ImageButton backButton = contentView.findViewById(R.id.backButton);
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,10 +51,16 @@ public class IntroRegister extends Fragment {
                 back();
             }
         });
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                back();
+            }
+        });
         return contentView;
     }
 
-    public void next(){
+    public void next(){ //Registrierungs-Logik
         if(email.isEmpty()||password.isEmpty()||name.isEmpty()) {
             Toast.makeText(getContext(), "Bitte füllen Sie alle Felder aus.", Toast.LENGTH_SHORT).show();
             return;
@@ -65,6 +71,7 @@ public class IntroRegister extends Fragment {
             Server.user = user;
             Intent main = new Intent(getContext(), MainActivity.class);
             startActivity(main);
+            back();
         } else Toast.makeText(getContext(), "Email bereits registriert", Toast.LENGTH_SHORT).show();
     }
 
