@@ -28,6 +28,7 @@ public class EscortRateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_escort_rate, container, false);
+        //Zugriff auf die Rating-Komponenten in contentView
         ratingBar1 = contentView.findViewById(R.id.ratingBar1);
         ratingBar1.setNumStars(5);
         appRating = ratingBar1.getNumStars();
@@ -47,7 +48,6 @@ public class EscortRateFragment extends Fragment {
     public void finish() { //temporaere Loesung
         appRating = ratingBar1.getNumStars();
         accompRating = ratingBar2.getNumStars();
-        Intent back = new Intent(getContext(), MainActivity.class);
-        startActivity(back);
+        getActivity().finish();
     }
 }

@@ -1,9 +1,11 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class User {
+public class User { //Benutzer-Klasse (alte Person)
     String userName;
     String password;
     String email;
@@ -16,6 +18,7 @@ public class User {
     ArrayList<Escort> finishedEscorts = new ArrayList<>();
     ArrayList<Address> addressHistory = new ArrayList<>();
     ArrayList<Address> addressFavorites = new ArrayList<>();
+    Drawable profilepicture;
 
     public User(String userName, String email, String password) {
         this.userName = userName;
@@ -61,6 +64,11 @@ public class User {
     public ArrayList<Address> getAddressFavorites(){
         return addressFavorites;
     }
+    public Drawable getProfilepicture() {return profilepicture;}
+    public void setProfilepicture(Drawable profilepicture) {this.profilepicture = profilepicture;}
+    public void setDescription(String description){this.description = description;}
+    public void setAge(int age){this.age = age;}
+    public void setOccupation(String occupation){this.occupation = occupation;}
 
     @Override
     public boolean equals(Object o) {

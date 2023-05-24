@@ -25,6 +25,7 @@ public class EscortFinishFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_escort_finish, container, false);
+        //Dialogfenster: Trinkgeldoptionen
         tipDialog = new Dialog(getContext());
         tipDialog.setContentView(R.layout.tip_dialogue_layout);
         tipDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -56,8 +57,8 @@ public class EscortFinishFragment extends Fragment {
                 tipDialog.dismiss();
             }
         });
-
         tipDialog.show();
+        //Zugriff auf die Button-Komponenten in contentView
         Button rateButton = contentView.findViewById(R.id.rateButton);
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +66,6 @@ public class EscortFinishFragment extends Fragment {
                 rate();
             }
         });
-
         Button finishButton = contentView.findViewById(R.id.finishButton);
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,9 +76,8 @@ public class EscortFinishFragment extends Fragment {
         return contentView;
     }
 
-    public void finish() { //temporaere Loesung
-        Intent back = new Intent(getContext(), MainActivity.class);
-        startActivity(back);
+    public void finish() {
+        getActivity().finish();
     }
 
     public void rate() { //temporaere Loesung -

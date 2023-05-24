@@ -59,10 +59,10 @@ public class EscortActiveDetailsFragment extends Fragment {
         start2.setText(escort.getStart().getAddressLine2());
         destination.setText(escort.getDestination().getAddressLine1());
         destination2.setText(escort.getDestination().getAddressLine2());
-        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-        time.setText(escort.getTime().format(customFormat));
-        service.setText(Server.user.getEscortRequest().getService().toString());
-        accompaniment.setText(Server.user.getEscortRequest().getAccompaniment().toString());
+        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("HH:mm");
+        time.setText(escort.getTime().format(customFormat)+" Uhr");
+        service.setText(escort.getService().toString());
+        accompaniment.setText(escort.getAccompaniment().toString());
 
         Button nextButton = contentView.findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {

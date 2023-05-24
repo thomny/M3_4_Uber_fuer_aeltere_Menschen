@@ -13,18 +13,18 @@ public class EscortInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escort_info);
-        //Activity ist aufgeteilt in Fragments
-        //escort = (Escort) getIntent().getSerializableExtra("escort");
-        //Integer pos = getIntent().getIntExtra("",0);
+        ImageButton closeButton = findViewById(R.id.closeButton);
+        //Position des Begleitungs-Items wird aus dem Intent genommen
         Integer pos;
         pos = getIntent().getIntExtra("position",0);
         escort = Server.user.getEscorts().get(pos);
+        //Position des Begleitungs-Items wird in eine Bundle für das nächste Fragment gegeben
         Bundle bundle = new Bundle();
         bundle.putInt("position",pos);
+        //EscortInfoActivity ist aufgeteilt in Fragments, beginnend mit EscortSummaryFragment
         EscortSummaryFragment escortSummaryFragment = new EscortSummaryFragment();
         escortSummaryFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,escortSummaryFragment).commit();
-        ImageButton closeButton = findViewById(R.id.closeButton);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,7 +34,6 @@ public class EscortInfoActivity extends AppCompatActivity {
     }
 
     public void close() {
-        Intent back = new Intent(this, MainActivity.class);
-        startActivity(back);
+        finish();
     }
 }

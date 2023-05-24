@@ -66,14 +66,16 @@ public class AddressAutocompleteAPI extends AsyncTask<String, Void, Document> {
         }
         return result;
     }
-
+    //Geoapify Adress Autocomplete API
     public static ArrayList<Address> getAddress(String query) throws ExecutionException, InterruptedException {
+        //query-String wird in ein passendes Format encoded
         String encodedQuery = "";
         try {
             encodedQuery = URLEncoder.encode(query, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        //URL wird mit API-Schlüssel und sonstigen benutzerdefinierbaren Werten definiert
         String apiKey = "b9fbcd28f0a84434b0ddfeafa82b2fee";
         String type = "street";
         String filter = "circle:16.36541227109319,48.207759746386074,22000";
@@ -81,16 +83,21 @@ public class AddressAutocompleteAPI extends AsyncTask<String, Void, Document> {
                 + "&lang=de&filter=" + filter + "&format=xml&apiKey=" + apiKey;
         ArrayList<Address> result = new ArrayList<Address>();
         AddressAutocompleteAPI apicall = new AddressAutocompleteAPI(); //API-Call
-        Document xmldocument = apicall.execute(urlstring).get();
+        Document xmldocument = apicall.execute(urlstring).get(); //Antwort wird zu einem XML-Dokument gemacht
+        //Erstellen einer NodeList aller 'results'-Elemente
         NodeList locations = xmldocument.getElementsByTagName("results");
+        //Die Liste wird durchgangen
         for (int index = 0; index < locations.getLength(); ++index) {
             Node location = locations.item(index);
             Address address = new Address();
+            //Node-Listen der brauchbaren Informationen werden erstellt
             NodeList address_line1 = ((Element) location).getElementsByTagName("address_line1");
             NodeList address_line2 = ((Element) location).getElementsByTagName("address_line2");
+            NodeList lon = ((Element) location).getElementsByTagName("lon");
+            NodeList lat = ((Element) location).getElementsByTagName("lat");
             NodeList street = ((Element) location).getElementsByTagName("street");
-            if (street.getLength() > 0) {
-                if (address_line1.getLength() > 0) {
+            if (street.getLength() > 0) { //hat das results-Item einen Eintrag im 'street'...
+                if (address_line1.getLength() > 0) { //..wird anschließend 'address_line1' auf einen Wert überprüft
                     String addressLine1 = address_line1.item(0).getTextContent();
                     String addressLine2 = "";
                     if (address_line2.getLength() > 0)
@@ -98,39 +105,38 @@ public class AddressAutocompleteAPI extends AsyncTask<String, Void, Document> {
                     try {
                         address.setAddressLine1(new String(addressLine1.getBytes(), "UTF-8"));
                         address.setAddressLine2(new String(addressLine2.getBytes(), "UTF-8"));
+                        address.setLongitude(lon.item(0).getTextContent());
+                        address.setLatitude(lat.item(0).getTextContent());
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    result.add(address);
+                    result.add(address); //Addresse wird zur Ergebnissliste hinzugefügt
                 }
             }
         }
         return result;
     }
-
+    //Geoapify Reverse Geocoding API
     public static Address getCurrentAddress(String lat, String lon) throws ExecutionException, InterruptedException {
+        //URL wird mit API-Schlüssel, Latitude und Longitude Werten definiert
         String apiKey = "b9fbcd28f0a84434b0ddfeafa82b2fee";
-        String urlstring = "https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&format=xml&apiKey=" + apiKey;
-        //String urlstring = "https://api.geoapify.com/v1/geocode/reverse?lat=52.51894887928074&lon=13.409808180753316&format=xml&apiKey=b9fbcd28f0a84434b0ddfeafa82b2fee";
+        String urlstring = "https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "&lon=" + lon + "&lang=de&format=xml&apiKey=" + apiKey;
         AddressAutocompleteAPI apicall = new AddressAutocompleteAPI(); //API-Call
-        Document xmldocument = apicall.execute(urlstring).get();
-        String addressLine1 = "test";
-        String addressLine2 = "test";
-        try {
+        Document xmldocument = apicall.execute(urlstring).get(); //Antwort wird zu einem XML-Dokument gemacht
+        String addressLine1 = lat;
+        String addressLine2 = lon;
+        try { //Werte aus dem XML-Dokument werden durch XPath gesucht und übernommen
             XPath xpath = XPathFactory.newInstance().newXPath();
             addressLine1 = xpath.evaluate   ("/results/address_line1", xmldocument);
             addressLine2 = xpath.evaluate   ("/results/address_line2", xmldocument);
-            Log.d("addressLine1-prev",addressLine1);
 
         } catch (XPathExpressionException e) {
             e.printStackTrace();
         }
-        Log.d("addressLine1",addressLine1);
+        //Aktueller Standort wird zu einer Addresse
         Address result = new Address(addressLine1, addressLine2);
         result.setLongitude(lon);
         result.setLatitude(lat);
-        Log.d("Longitude",lon);
-        Log.d("Latitude",lat);
         return result;
     }
 }

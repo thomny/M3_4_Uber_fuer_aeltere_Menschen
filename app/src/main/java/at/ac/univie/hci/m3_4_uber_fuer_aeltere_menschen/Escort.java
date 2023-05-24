@@ -9,9 +9,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Escort implements Serializable {
+public class Escort implements Serializable { //Begleitungs/Fahrt-Klasse
     static int count;
-    int id; //diclare private!!!!!
+    int id;
     Address start;
     Address destination;
     LocalDateTime time;

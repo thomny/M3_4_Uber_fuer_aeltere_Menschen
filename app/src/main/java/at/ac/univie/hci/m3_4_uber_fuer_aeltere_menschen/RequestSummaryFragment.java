@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class RequestSummaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_request_summary, container, false);
+        //Zugriff auf die Komponenten in contentView
         TextView cell1 = contentView.findViewById(R.id.cell1);
         cell1.setBackgroundResource(R.drawable.progress_bar_cell_filled);
         TextView cell2 = contentView.findViewById(R.id.cell2);
@@ -38,22 +40,8 @@ public class RequestSummaryFragment extends Fragment {
         TextView cell5 = contentView.findViewById(R.id.cell5);
         cell5.setBackgroundResource(R.drawable.progress_bar_cell_filled);
         ImageButton backButton = contentView.findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                back();
-            }
-        });
+        ImageView accompanimentPicture = contentView.findViewById(R.id.accompanimentPicture);
         Button nextButton = contentView.findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                next();
-            }
-        });
-        if(Server.user.getEscortRequest().getNow())
-            Server.user.getEscortRequest().setTime(LocalDateTime.now());
-
         TextView start = contentView.findViewById(R.id.start_location);
         TextView destination = contentView.findViewById(R.id.destination);
         TextView start2 = contentView.findViewById(R.id.start_location2);
@@ -61,22 +49,50 @@ public class RequestSummaryFragment extends Fragment {
         TextView time = contentView.findViewById(R.id.time);
         TextView service = contentView.findViewById(R.id.service);
         TextView accompaniment = contentView.findViewById(R.id.accompaniment);
+        //Bei 'JETZT'-Auswahl wird hier die Zeit festgelegt
+        if(Server.user.getEscortRequest().getNow())
+            Server.user.getEscortRequest().setTime(LocalDateTime.now());
+        //ausgewählte Daten werden hier zusammengefasst
         start.setText(Server.user.getEscortRequest().getStart().getAddressLine1());
         start2.setText(Server.user.getEscortRequest().getStart().getAddressLine2());
         destination.setText(Server.user.getEscortRequest().getDestination().getAddressLine1());
         destination2.setText(Server.user.getEscortRequest().getDestination().getAddressLine2());
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-        time.setText(Server.user.getEscortRequest().getTime().format(customFormat));
+        String t = Server.user.getEscortRequest().getTime().format(customFormat) + " Uhr";
+        time.setText(t);
         service.setText(Server.user.getEscortRequest().getService().toString());
         accompaniment.setText(Server.user.getEscortRequest().getAccompaniment().toString());
+        if(Server.user.getEscortRequest().getAccompaniment().getProfilepicture()!=null)
+            accompanimentPicture.setImageDrawable(Server.user.getEscortRequest().getAccompaniment().getProfilepicture());
+        // OnClickListener
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                next();
+            }
+        });
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                back();
+            }
+        });
         return contentView;
     }
 
-    public void back() { //Zurueck-Icon fuehrt zur vorherigen Activity zurueck
+    public void back() {
         RequestAccompanimentListFragment requestAccompanimentListFragment = new RequestAccompanimentListFragment();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,requestAccompanimentListFragment).commit();
     }
-    public void next() { //temporaere Loesung
+    public void next() {
+        //Daten werden in ein neues Escort-Objekt übernommen und in die Escort-Liste des Users eingefügt
         Escort finished_request = new Escort();
         finished_request.setStart(Server.user.getEscortRequest().start);
         finished_request.setDestination(Server.user.getEscortRequest().destination);
@@ -85,10 +101,8 @@ public class RequestSummaryFragment extends Fragment {
         finished_request.setAccompaniment(Server.user.getEscortRequest().accompaniment);
         finished_request.setId();
         Server.user.getEscorts().add(finished_request);
-        Server.accept(finished_request); //Mock
-
-        Server.user.getEscortRequest().setTime(false);
-
+        Server.accept(finished_request); //Mock: ausgewählte Begleitperson bestätigt die Anfrage
+        //Dialogfenster: Abschluss einer erfolgreichen Anfrage
         finishDialog = new Dialog(getContext());
         finishDialog.setContentView(R.layout.request_dialogue_layout);
         finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -112,13 +126,12 @@ public class RequestSummaryFragment extends Fragment {
     }
 
     public void finish (){
-        Intent back = new Intent(getContext(), MainActivity.class);
-        startActivity(back);
+        //ausgewählte Daten werden bei Abbruch der Anforderung gelöscht
+        Server.user.getEscortRequest().setTime(false);
+        Server.user.getEscortRequest().setStart(null);
+        Server.user.getEscortRequest().setDestination(null);
+        Server.user.getEscortRequest().setService(null);
+        Server.user.getEscortRequest().setAccompaniment(null);
+        getActivity().finish();
     }
 }
-
-/*if (User.escort_request.getNow()) {
-            User.escort_request.setTime(false);
-            Intent escortInfo = new Intent(getContext(), EscortInfoActivity.class);
-            escortInfo.putExtra("position", ((Integer) User.escorts.size()-1));
-            startActivity(escortInfo); //Ausfuehren des Intents*/

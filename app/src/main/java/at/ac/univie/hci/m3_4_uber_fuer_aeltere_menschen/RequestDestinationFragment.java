@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -28,7 +29,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class RequestDestinationFragment extends Fragment {
+public class RequestDestinationFragment extends Fragment { //Ähnlich wie RequestStartFragment
     private Handler searchHandler = new Handler();
     private Runnable searchRunnable;
     Address current;
@@ -39,6 +40,7 @@ public class RequestDestinationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_request_destination, container, false);
+        //Progress-Zelle wird gefüllt
         TextView cell1 = contentView.findViewById(R.id.cell1);
         cell1.setBackgroundResource(R.drawable.progress_bar_cell_filled);
         ImageButton backButton = contentView.findViewById(R.id.backButton);
@@ -162,6 +164,14 @@ public class RequestDestinationFragment extends Fragment {
             @Override
             public void run() { //nachdem view initialisiert wurde, wird die Tastatur sofort geschlossen
                 searchbar.clearFocus();
+            }
+        });
+
+        //Android-Back-Button wird überschrieben
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                back();
             }
         });
         return contentView;

@@ -2,7 +2,7 @@ package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
 import java.util.Objects;
 
-public class Address {
+public class Address { //Addressen-Klasse
     String addressLine1;
     String addressLine2;
     String longitude;
@@ -44,6 +44,11 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return this.addressLine2.equals(address.toString());
+        return Objects.equals(addressLine1, address.addressLine1) && Objects.equals(addressLine2, address.addressLine2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressLine1, addressLine2);
     }
 }

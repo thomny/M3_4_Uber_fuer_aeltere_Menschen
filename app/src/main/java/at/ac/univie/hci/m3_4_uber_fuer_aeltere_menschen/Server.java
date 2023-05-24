@@ -1,13 +1,16 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class Server {
+public class Server { //Simulation eines Servers (Mock)
     public static ArrayList<Accompaniment> accompaniments = new ArrayList<>();
     public static ArrayList<User> users = new ArrayList<>();
     public static TreeMap userList = new TreeMap();

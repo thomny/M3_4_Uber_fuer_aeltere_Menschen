@@ -20,21 +20,26 @@ public class RequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
-        //RequestActivity ist aufgeteilt in Fragments
+        //Zugriff auf CLOSE-Icon für alle Fragmente in Request
+        ImageButton closeButton = findViewById(R.id.closeButton);
+        //RequestActivity ist aufgeteilt in Fragments, beginnend mit RequestStartFragment
         RequestStartFragment requestStartFragment = new RequestStartFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,requestStartFragment).commit();
-        ImageButton closeButton = findViewById(R.id.closeButton);
         closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override //auf CLOSE-Icon klicken führt zu MainActivity zurück
             public void onClick(View view) {
                 close();
             }
         });
     }
 
-    public void close() { //Zurueck-Icon fuehrt zur vorherigen Activity zurueck
+    public void close() { //Zurueck-Icon fuehrt zur MainActivity zurueck
+        //ausgewählte Daten werden bei Abbruch der Anforderung gelöscht
         Server.user.getEscortRequest().setTime(false);
-        Intent back = new Intent(this, MainActivity.class);
-        startActivity(back);
+        Server.user.getEscortRequest().setStart(null);
+        Server.user.getEscortRequest().setDestination(null);
+        Server.user.getEscortRequest().setService(null);
+        Server.user.getEscortRequest().setAccompaniment(null);
+        finish();
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -34,12 +35,14 @@ public class EscortSummaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_escort_summary, container, false);
-
+        //Position des Begleitungs-Items wird aus dem Bundle genommen
         Bundle bundle = getArguments();
         pos = bundle.getInt("position");
         escort = Server.user.getEscorts().get(pos);
+        //ist die Begleitung bereits 'aktiv', wird zum nächsten Fragment übersprungen.
         if(escort.getStatus().equals(EscortStatus.ACTIVE))
             next();
+        //Zugriff auf die Komponenten in contentView
         Button cancelButton = contentView.findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,16 +59,21 @@ public class EscortSummaryFragment extends Fragment {
         TextView time = contentView.findViewById(R.id.time);
         TextView service = contentView.findViewById(R.id.service);
         TextView accompaniment = contentView.findViewById(R.id.accompaniment);
+        ImageView accompanimentPicture = contentView.findViewById(R.id.accompanimentPicture);
         escortStatus = contentView.findViewById(R.id.escortStatus);
         start.setText(escort.getStart().getAddressLine1());
         start2.setText(escort.getStart().getAddressLine2());
         destination.setText(escort.getDestination().getAddressLine1());
         destination2.setText(escort.getDestination().getAddressLine2());
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-        time.setText(escort.getTime().format(customFormat));
-        service.setText(Server.user.getEscortRequest().getService().toString());
-        accompaniment.setText(Server.user.getEscortRequest().getAccompaniment().toString());
+        String t = Server.user.getEscortRequest().getTime().format(customFormat) + " Uhr";
+        time.setText(t);
+        service.setText(escort.getService().toString());
+        accompaniment.setText(escort.getAccompaniment().toString());
+        if(escort.getAccompaniment().getProfilepicture()!=null)
+            accompanimentPicture.setImageDrawable(escort.getAccompaniment().getProfilepicture());
         icon = contentView.findViewById(R.id.icon);
+        //Status-Logik
         if(!(escort.getStatus().equals(EscortStatus.ACCEPTED))) {
             escortStatus.setText("Nicht bestätigt");
             icon.setImageResource(R.drawable.baseline_close_24_red);
@@ -73,11 +81,13 @@ public class EscortSummaryFragment extends Fragment {
             escortStatus.setText("Fahrt bestätigt");
             icon.setImageResource(R.drawable.baseline_check_box_24);
         }
+        //Bei bestätigter Fahrt und Eintritt der Begleitungs-Zeit wird der nextButton sichtbar
         if(escort.getStatus().equals(EscortStatus.ACCEPTED)
                 &&(LocalDateTime.now().isAfter(escort.getTime()) || LocalDateTime.now().isEqual(escort.getTime()))) {
             nextButton.setVisibility(View.VISIBLE);
             buttonLogic();
         }
+        //solange die Konditionen zum Start einer Begleitung nicht erfüllt sind, wird alle 5sec geupdated
         if(!escort.getEscortReady()){
             Log.d("if-block","!escort.getEscortReady()");
             refreshHandler = new Handler();
@@ -90,13 +100,18 @@ public class EscortSummaryFragment extends Fragment {
                 }
             };
             refreshHandler.postDelayed(refreshRunnable, 5000);
-        }
+        } //Konditionen sind erfüllt - nextButton wird gezeigt
         else {buttonLogic();Log.d("else-block","escort.getEscortReady()");}
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                getActivity().finish();
+            }
+        });
         return contentView;
     }
 
-    public void check(){
-        Log.d("REFRESH","EscortSummary updated");
+    public void check(){ //Daten werden geupdated
         if(escort.getStatus().equals(EscortStatus.ACCEPTED)) {
             escortStatus.setText("Fahrt bestätigt");
             icon.setImageResource(R.drawable.baseline_check_box_24);
@@ -109,8 +124,8 @@ public class EscortSummaryFragment extends Fragment {
         }
     }
 
-    public void buttonLogic(){
-        Log.d("buttonLogic","entered buttonLogic");
+    public void buttonLogic(){ //Logik des Weiter-Buttons
+        //Begleitungs-Status wird geupdated und Button erscheint
         nextButton.setVisibility(View.VISIBLE);
         icon.setImageResource(R.drawable.baseline_close_24_red);
         if(escort.getStatus().equals(EscortStatus.ACCEPTED)){
@@ -121,6 +136,7 @@ public class EscortSummaryFragment extends Fragment {
             escortStatus.setText("Fahrt aktiv");
             icon.setImageResource(R.drawable.baseline_directions_walk_24);
         }
+        //Button-Status
         if (escort.getUserReady() && escort.getAccompReady()) {
             nextButton.setText("Starten");
             nextButton.setBackgroundResource(R.drawable.button);
@@ -149,16 +165,16 @@ public class EscortSummaryFragment extends Fragment {
                     nextButton.setText("Bereit");
                     nextButton.setBackgroundResource(R.drawable.button);
                 } else if (escort.getUserReady() && escort.getAccompReady() && nextButton.getText().equals("Starten"))
-                    next();
+                    next(); //wenn User und Begleitperson beide bereit sind, wird die Begleitung gestartet
             }
         });
     }
 
 
-    public void next() { //temporaere Loesung -
-            Bundle bundle = new Bundle();
+    public void next() { //Begleitung wird gestartet
+            Bundle bundle = new Bundle(); //Position wird an das nächste Fragment weitergegeben
             bundle.putInt("position",pos);
-            escort.setStatus(EscortStatus.ACTIVE);
+            escort.setStatus(EscortStatus.ACTIVE); //Status wechselt auf 'aktiv'
             EscortStartFragment escortStartFragment = new EscortStartFragment();
             escortStartFragment.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, escortStartFragment).commit();
@@ -177,20 +193,19 @@ public class EscortSummaryFragment extends Fragment {
             refreshHandler.removeCallbacks(refreshRunnable);
     }
 
-    public void accompReadyTimer(){
+    public void accompReadyTimer(){ // Mock: Begleitperson stellt sich nach 7sec als 'bereit' verfügbar
         accompReadyTask = new AsyncTask<Void, Void, Void>() {
             @Override
-            protected Void doInBackground(Void... voids) {
+            protected Void doInBackground(Void... voids) { //Timer im Hintergrund
                 try {
-                    Thread.sleep(7000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 return null;
             }
-
             @Override
-            protected void onPostExecute(Void aVoid) {
+            protected void onPostExecute(Void aVoid) { //nachdem der Timer zu Ende ist
                 escort.setAccompReady();
                 if (escort.getUserReady() && escort.getAccompReady()) {
                     nextButton.setText("Starten");
@@ -201,9 +216,8 @@ public class EscortSummaryFragment extends Fragment {
         accompReadyTask.execute();
     }
 
-    public void cancel(){
+    public void cancel(){ //Begleitung wird storniert
         Server.user.getEscorts().remove(escort);
-        Intent back = new Intent(getContext(), MainActivity.class);
-        startActivity(back);
+        getActivity().finish();
     }
 }

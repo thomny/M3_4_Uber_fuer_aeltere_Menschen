@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class Accompaniment implements Parcelable,Serializable {
+public class Accompaniment implements Parcelable,Serializable { //Begleitperson-Klasse
     String name;
     int age;
     String occupation;
@@ -57,6 +57,9 @@ public class Accompaniment implements Parcelable,Serializable {
     }
     public Drawable getProfilepicture() {
         return profilepicture;
+    }
+    public void setProfilepicture(Drawable picture) {
+        profilepicture = picture;
     }
 
     @Override
