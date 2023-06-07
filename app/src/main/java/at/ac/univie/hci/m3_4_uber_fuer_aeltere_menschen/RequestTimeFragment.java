@@ -102,7 +102,8 @@ public class RequestTimeFragment extends Fragment {
     }
 
     public void customTimeSet(View contentView){ //Logik für manuelle Zeitauswahl
-        customButton.setText(LocalDateTime.of(year,month,day,hour,minute).format(customFormat));
+        String time = LocalDateTime.of(year,month,day,hour,minute).format(customFormat) + " Uhr";
+        customButton.setText(time);
         customButton.setOnClickListener(new View.OnClickListener() {
             @Override //solange (ausgewählte Zeit >= jetzige Zeit) wird neue Zeit akzeptiert
             public void onClick(View view) {
@@ -124,7 +125,7 @@ public class RequestTimeFragment extends Fragment {
                 year = i;
                 month = i1+1;
                 day = i2;
-                String time = LocalDateTime.of(year,month,day,hour,minute).format(customFormat);
+                String time = LocalDateTime.of(year,month,day,hour,minute).format(customFormat) + " Uhr";
                 customButton.setText(time); //'customButton'-Text wird mit ausgewählten Daten aktualisiert
             }
         });
@@ -138,7 +139,8 @@ public class RequestTimeFragment extends Fragment {
                 hour = i;
                 minute = i1;
                 //'customButton'-Text wird mit ausgewählten Daten aktualisiert
-                customButton.setText(LocalDateTime.of(year,month,day,hour,minute).format(customFormat));
+                String time = LocalDateTime.of(year,month,day,hour,minute).format(customFormat) + " Uhr";
+                customButton.setText(time);
             }
         });
     }

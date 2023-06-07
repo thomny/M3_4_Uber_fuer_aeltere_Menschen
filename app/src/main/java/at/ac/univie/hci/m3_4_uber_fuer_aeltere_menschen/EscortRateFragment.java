@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 public class EscortRateFragment extends Fragment {
     RatingBar ratingBar1;
@@ -48,6 +49,7 @@ public class EscortRateFragment extends Fragment {
     public void finish() { //temporaere Loesung
         appRating = ratingBar1.getNumStars();
         accompRating = ratingBar2.getNumStars();
+        Toast.makeText(getContext(), "Bewertung wurde abgesendet.", Toast.LENGTH_SHORT).show();
         getActivity().finish();
     }
 }

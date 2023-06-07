@@ -129,7 +129,13 @@
                     android:textColor="@color/black"
                     android:textSize="26sp" />
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Zu bezahlender Betrag: 7€"
+                android:textSize="25sp" />
         </LinearLayout>
 
 

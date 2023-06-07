@@ -24,14 +24,14 @@
 
         <SearchView
             android:id="@+id/searchbar"
-            android:layout_width="361dp"
+            android:layout_width="380dp"
             android:layout_height="60dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="30dp"
             app:theme="@style/CustomSearchView"
             android:background="#FFFFFF"
             android:elevation="5dp"
-            android:queryHint="Suchen Sie eine Adresse"
+            android:queryHint="Sie können Adressen suchen"
             android:iconifiedByDefault="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -49,10 +49,20 @@
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="360dp"
-            android:layout_height="437dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchbar" />
+
+        <ImageView
+            android:id="@+id/graphic"
+            android:layout_width="320dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="400dp"
+            android:background="@drawable/targetgraphic"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchbar" />
 

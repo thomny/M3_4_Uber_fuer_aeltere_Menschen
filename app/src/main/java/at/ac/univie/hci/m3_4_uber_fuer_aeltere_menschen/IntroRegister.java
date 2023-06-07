@@ -22,9 +22,9 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 public class IntroRegister extends Fragment {
-    String name;
-    String email;
-    String password;
+    String name = "";
+    String email = "";
+    String password = "" ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,8 +38,10 @@ public class IntroRegister extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String lowercaseName = nameEditText.getText().toString().toLowerCase();
-                name = lowercaseName.substring(0, 1).toUpperCase() + lowercaseName.substring(1);
+                if(!nameEditText.getText().toString().isEmpty()) {
+                    String lowercaseName = nameEditText.getText().toString().toLowerCase();
+                    name = lowercaseName.substring(0, 1).toUpperCase() + lowercaseName.substring(1);
+                }
                 email = accountNameEditText.getText().toString();
                 password = passwordEditText.getText().toString();
                 next();
@@ -70,6 +72,7 @@ public class IntroRegister extends Fragment {
             Server.userList.put(email,user);
             Server.user = user;
             Intent main = new Intent(getContext(), MainActivity.class);
+            Toast.makeText(getContext(), "Registrierung erfolgreich.", Toast.LENGTH_SHORT).show();
             startActivity(main);
             back();
         } else Toast.makeText(getContext(), "Email bereits registriert", Toast.LENGTH_SHORT).show();

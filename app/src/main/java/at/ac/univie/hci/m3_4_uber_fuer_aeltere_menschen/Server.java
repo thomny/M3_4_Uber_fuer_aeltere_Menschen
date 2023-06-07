@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -17,18 +18,18 @@ public class Server { //Simulation eines Servers (Mock)
     public static User user;
     static {
         Server.accompaniments.add(
-                new Accompaniment("Anna",20,"Student",
+                new Accompaniment("Anna",20,"Studentin",
                         "Hallo, mein Name ist Anna. Ich spreche deutsch, türkisch und ein wenig serbisch.\n" +
                                 "Ich habe viel Geduld und begleite dich gerne zu Arztterminen."));
         Server.accompaniments.add(
                 new Accompaniment("Peter",23,"Student",
-                        "Hi, nice to meet you. My name is Peter and I'm 23 years old"));
+                        "Hi, ich würde mich sehr freuen, dich kennenzulernen!"));
         Server.accompaniments.add(
                 new Accompaniment("Maximilian",27,"Student",
-                        "Hi, nice to meet you. My name is Max and I'm 27 years old"));
+                        "Ich habe Erfahrung im Umgang mit Senioren und würde mich sehr freuen, dich kennenzulernen."));
         Server.accompaniments.add(
-                new Accompaniment("Julia",30,"Student",
-                        "Hi, nice to meet you. My name is Julia and I'm 30 years old"));
+                new Accompaniment("Julia",30,"Krankenschwester",
+                        "In meiner Freizeit helfe ich gerne Menschen mit Bedürfnissen."));
         Server.userList.put("dummy@mail.at",new User("Dummy","dummy@mail.at","dummy"));
 
     }

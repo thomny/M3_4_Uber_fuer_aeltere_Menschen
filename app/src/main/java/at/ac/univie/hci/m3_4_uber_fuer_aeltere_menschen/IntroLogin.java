@@ -75,6 +75,7 @@ public class IntroLogin extends Fragment {
             if(user.getPassword().equals(password)){
                 Server.user = (User) Server.userList.get(email);
                 Intent main = new Intent(getContext(), MainActivity.class);
+                Toast.makeText(getContext(), "Anmeldung erfolgreich.", Toast.LENGTH_SHORT).show();
                 startActivity(main);
                 back();
             }

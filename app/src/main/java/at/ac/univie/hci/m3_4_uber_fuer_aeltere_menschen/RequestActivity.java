@@ -4,11 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -26,11 +33,45 @@ public class RequestActivity extends AppCompatActivity {
         RequestStartFragment requestStartFragment = new RequestStartFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,requestStartFragment).commit();
         closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override //auf CLOSE-Icon klicken führt zu MainActivity zurück
+            @Override //auf CLOSE-Icon klicken öffnet Abbruch-Dialogfenster
             public void onClick(View view) {
+                openCancelDialog();
+            }
+        });
+    }
+
+    public void openCancelDialog(){
+        //Dialogfenster: Fahrtanforderungs-Abbruch
+        Dialog cancelDialog = new Dialog(this);
+        cancelDialog.setContentView(R.layout.cancel_dialogue_layout);
+        cancelDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button yesButton = cancelDialog.findViewById(R.id.yesButton);
+        Button noButton = cancelDialog.findViewById(R.id.noButton);
+        TextView dialogText = cancelDialog.findViewById(R.id.textView);
+        dialogText.setText("Wollen Sie wirklich abbrechen?");
+        yesButton.setText("Ja, abbrechen");
+        noButton.setText("Nein, nicht abbrechen");
+        ImageView closeButton = cancelDialog.findViewById(R.id.closeButton);
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
                 close();
             }
         });
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+            }
+        });
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelDialog.dismiss();
+            }
+        });
+        cancelDialog.show();
     }
 
     public void close() { //Zurueck-Icon fuehrt zur MainActivity zurueck

@@ -17,28 +17,30 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 public class IntroWelcome extends Fragment {
+    int dummyNumber = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_intro_welcome, container, false);
         //Zugriff auf die Komponenten in contentView
-        TextView textView4 = contentView.findViewById(R.id.textView4);
-        textView4.setText(Html.fromHtml("<u>" + "So funktioniert’s!" + "</u>"));
-        TextView registerButton = contentView.findViewById(R.id.registerTextView);
-        registerButton.setText(Html.fromHtml("oder " + "<u>" + "registrieren" + "</u>"));
         ImageButton menu = contentView.findViewById(R.id.menu);
         menu.setVisibility(View.GONE);
+        Button registerButton = contentView.findViewById(R.id.registerButton);
         Button loginButton = contentView.findViewById(R.id.loginButton);
         ImageView logo = contentView.findViewById(R.id.logo);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                if(dummyNumber == 2) {
+                    dummyNumber = 0;
+                    dummyLogin();
+                } else login();
             }
         });
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +52,7 @@ public class IntroWelcome extends Fragment {
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dummyLogin();
+                ++dummyNumber;
             }
         });
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
@@ -71,6 +73,7 @@ public class IntroWelcome extends Fragment {
 
     public void dummyLogin() { //schneller Einstieg in die App für Testzwecke
         Server.user = (User) Server.userList.get("dummy@mail.at");
+        Toast.makeText(getContext(), "Anmeldung als Testuser erfolgreich", Toast.LENGTH_SHORT).show();
         Intent main = new Intent(getContext(), MainActivity.class);
         startActivity(main);
     }

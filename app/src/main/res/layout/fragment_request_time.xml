@@ -81,6 +81,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="411dp"
                     android:layout_height="320dp"
+                    android:dateTextAppearance="@android:style/TextAppearance.Large"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
                 <TimePicker

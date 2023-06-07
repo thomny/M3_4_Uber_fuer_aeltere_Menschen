@@ -29,10 +29,12 @@
         <TextView
             android:id="@+id/userGreeting"
             style="@style/TitleTextStyle"
-            android:text="Anmeldung"
+            android:layout_width="322dp"
+            android:layout_height="97dp"
+            android:layout_marginTop="30dp"
+            android:text="Geben Sie Ihre Kontodaten ein"
             android:textSize="40dp"
             android:textStyle="bold"
-            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -53,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="E-mail oder Telefonnummer"
+            android:text="Benutzername"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userGreeting" />
@@ -77,25 +79,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="50dp"
-            android:text="Anmeldedaten merken"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordView" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="FaceID erlauben"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

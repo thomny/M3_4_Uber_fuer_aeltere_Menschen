@@ -49,6 +49,9 @@ public class RequestSummaryFragment extends Fragment {
         TextView time = contentView.findViewById(R.id.time);
         TextView service = contentView.findViewById(R.id.service);
         TextView accompaniment = contentView.findViewById(R.id.accompaniment);
+        TextView amount = contentView.findViewById(R.id.amount);
+        if(Server.user.getEscortRequest().getService()==Service.AUTO)
+            amount.setText("Zu bezahlender Betrag: 15€");
         //Bei 'JETZT'-Auswahl wird hier die Zeit festgelegt
         if(Server.user.getEscortRequest().getNow())
             Server.user.getEscortRequest().setTime(LocalDateTime.now());

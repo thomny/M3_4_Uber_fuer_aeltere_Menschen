@@ -33,14 +33,17 @@ public class AddressSearchAdapter extends ArrayAdapter<Address> { //Adapter für
         //Komponenten werden mit den Informationen der Addresse an der jetzigen Position gefuellt
         TextView addressLine1 = convertView.findViewById(R.id.addressLine1);
         TextView addressLine2 = convertView.findViewById(R.id.addressLine2);
+        ImageView nextButton = convertView.findViewById(R.id.nextButton);
         addressLine1.setText(address.getAddressLine1());
         addressLine2.setText(address.getAddressLine2());
         addressLine1.setTextColor(Color.BLACK);
         addressLine2.setTextColor(Color.BLACK);
-        //Ist die Addresse bereits in RequestStartFragment ausgewählt, wird sie hellgrau angezeigt
+        nextButton.setVisibility(View.VISIBLE);
+        //Ist die Addresse bereits in RequestStartFragment ausgewählt, wird sie gekennzeichnet
         if(address.equals(Server.user.getEscortRequest().start)){
             addressLine1.setTextColor(0xFFCCCCCC);
             addressLine2.setTextColor(0xFFCCCCCC);
+            nextButton.setVisibility(View.GONE);
         }
         return convertView;
     }

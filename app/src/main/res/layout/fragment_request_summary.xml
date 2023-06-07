@@ -34,7 +34,7 @@
 
         <LinearLayout
             android:layout_width="373dp"
-            android:layout_height="331dp"
+            android:layout_height="400dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/item_border"
             android:orientation="vertical"
@@ -185,6 +185,13 @@
                     android:text="Begleitung"
                     android:textSize="25sp" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Zu bezahlender Betrag: 7€"
+                android:textSize="25sp" />
         </LinearLayout>
         <Button
             android:id="@+id/nextButton"

@@ -15,9 +15,9 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Passwort"
+            android:text="Geben Sie ein Passwort an"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/accountname" />
@@ -29,7 +29,7 @@
         <TextView
             android:id="@+id/userGreeting"
             style="@style/TitleTextStyle"
-            android:text="Registrierung"
+            android:text="Erstellen Sie ein neues Konto"
             android:textSize="40dp"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="E-mail oder Telefonnummer"
+            android:text="Geben Sie einen Benutzernamen an"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="Name"
+            android:text="Wie darf man Sie ansprechen?"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userGreeting" />
@@ -75,6 +75,7 @@
             android:layout_height="60dp"
             android:ems="10"
             android:inputType="textEmailAddress"
+            android:hint="Benutzername"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -85,6 +86,7 @@
             android:layout_height="60dp"
             android:ems="10"
             android:inputType="textPassword"
+            android:hint="Passwort"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -94,6 +96,7 @@
             android:layout_height="60dp"
             android:ems="10"
             android:inputType="textEmailAddress"
+            android:hint="Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameView" />

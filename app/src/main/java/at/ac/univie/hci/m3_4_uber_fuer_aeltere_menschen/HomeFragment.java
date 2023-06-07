@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
@@ -46,13 +47,10 @@ public class HomeFragment extends Fragment {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override //auf SEARCH-Button klicken führt zu Request-Activity
             public void onClick(View view) {
-                startRequest();
+                startRequest(contentView);
             }
         });
-        //Escort-Listen-Logik (listStatus wird im Moment nicht verwendet)
-        if(!Server.user.getEscorts().isEmpty()) {
-            listStatus.setText("");
-        }
+        //Escort-Listen-Logik
         ListView escortsList = contentView.findViewById(R.id.escortsList);
         escortAdapter = new EscortAdapter(getContext(), Server.user.getEscorts());
         escortsList.setAdapter(escortAdapter);
@@ -65,7 +63,6 @@ public class HomeFragment extends Fragment {
                 Intent escortInfo = new Intent(getContext(), EscortInfoActivity.class);
                 escortInfo.putExtra("position", ((Integer) Server.user.getEscorts().indexOf(escort)));
                 startActivity(escortInfo);
-                refresh();
             }
         });
         //Refresh-Logik
@@ -90,10 +87,6 @@ public class HomeFragment extends Fragment {
         Log.d("REFRESH","Page updated");
         if (escortAdapter != null)
             escortAdapter.notifyDataSetChanged();
-        listStatus.setText("");
-        if(Server.user!=null&&Server.user.getEscorts().isEmpty())
-            listStatus.setText("");
-            //listStatus.setText("Noch keine Begleitungen.");
     }
     @Override
     public void onDestroyView() {
@@ -101,12 +94,10 @@ public class HomeFragment extends Fragment {
         refreshHandler.removeCallbacks(refreshRunnable);
     }
 
-    public void startRequest () {
+    public void startRequest (View contentView) {
         //Intent fuer das Wechseln der momentanen Activity zu RequestActivity wird erstellt
         Intent request = new Intent(getContext(), RequestActivity.class);
         startActivity(request);
-        listStatus.setText("");
-        refresh();
     }
 
     public void popupMenu(View view) { //TopBar-Menü
@@ -128,6 +119,7 @@ public class HomeFragment extends Fragment {
 
     public void logout() { //Abmelden
         Server.user = null;
+        Toast.makeText(getContext(), "Erfolgreich abgemeldet.", Toast.LENGTH_SHORT).show();
         getActivity().finish();
     }
 }

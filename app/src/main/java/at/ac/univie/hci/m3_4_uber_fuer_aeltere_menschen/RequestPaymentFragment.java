@@ -1,6 +1,7 @@
 package at.ac.univie.hci.m3_4_uber_fuer_aeltere_menschen;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -48,6 +49,9 @@ public class RequestPaymentFragment extends Fragment {
         cell5.setBackgroundResource(R.drawable.progress_bar_cell_filled);
         TextView cell6 = contentView.findViewById(R.id.cell6);
         cell6.setBackgroundResource(R.drawable.progress_bar_cell_filled);
+        TextView amount = contentView.findViewById(R.id.amount);
+        if(Server.user.getEscortRequest().getService()==Service.AUTO)
+            amount.setText("Zu bezahlender Betrag: 15€");
         ImageButton backButton = contentView.findViewById(R.id.backButton);
         nextButton = contentView.findViewById(R.id.nextButton);
         cashLayout = contentView.findViewById(R.id.cashLayout);
@@ -122,6 +126,7 @@ public class RequestPaymentFragment extends Fragment {
         finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ImageView finishCloseButton = finishDialog.findViewById(R.id.closeButton);
         Button tipButton1 = finishDialog.findViewById(R.id.button1);
+        //schließt Dialogfenster bei Betätigung der Schaltfläche
         tipButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,10 +134,18 @@ public class RequestPaymentFragment extends Fragment {
                 finish();
             }
         });
+        //schließt Dialogfenster bei Betätigung des x-Symbols
         finishCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finishDialog.dismiss();
+                finish();
+            }
+        });
+        //beendet die Activity by Schließen des Dialogfensters
+        finishDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
                 finish();
             }
         });

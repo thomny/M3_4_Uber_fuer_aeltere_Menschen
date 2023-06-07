@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -212,6 +213,7 @@ public class EscortSummaryFragment extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) { //nachdem der Timer zu Ende ist
                 escort.setAccompReady();
+                Toast.makeText(getContext(), "Die Begleitung ist bereit.", Toast.LENGTH_SHORT).show();
                 if (escort.getUserReady() && escort.getAccompReady()) {
                     nextButton.setText("Starten");
                     nextButton.setBackgroundResource(R.drawable.button);

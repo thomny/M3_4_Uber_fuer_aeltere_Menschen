@@ -90,7 +90,7 @@ public class EscortStartFragment extends Fragment {
                 }
                 if (location.distanceTo(targetLocation) <= 10) {
                     Log.d("GOAL","reached destination");
-                    if(distance.getText().equals(0)) //Fehlerabsicherung
+                    if(distance==null||distance.getText().equals(0)) //Fehlerabsicherung
                         return;
                     next();
                 }

@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:layout_marginTop="16dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:orientation="vertical"
@@ -42,4 +43,12 @@
             android:textSize="20sp"
             android:layout_marginStart="22sp" />
     </LinearLayout>
+    <ImageView
+        android:id="@+id/nextButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/baseline_arrow_forward_ios_24_custom"/>
 </RelativeLayout>
